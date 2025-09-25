@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import socket
+import os
 
 app = Flask(__name__)
 
@@ -22,32 +23,29 @@ def home():
 
 
 def get_local_ip():
-    """
-    Get the correct local network IP for the machine.
-    Works even if multiple adapters exist.
-    """
+    """Get the local network IP of the machine."""
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        # Doesn't need to connect, just used to get the correct interface IP
         s.connect(("8.8.8.8", 80))
-        local_ip = s.getsockname()[0]
+        return s.getsockname()[0]
     except Exception:
-        local_ip = "127.0.0.1"
+        return "127.0.0.1"
     finally:
         s.close()
-    return local_ip
 
-
-import os
 
 if __name__ == "__main__":
-    local_ip = get_local_ip()
-    port = int(os.environ.get("PORT", 5000))  # Use Render's assigned port if available
+    port = int(os.environ.get("PORT", 5000))  # Use Render's PORT if available
+    is_local = "PORT" not in os.environ     # Detect if running locally
 
-    print("\n🚀 Flask Seminar Server Running:")
-    print(f"   Local:   http://127.0.0.1:{port}")
-    print(f"   Network: http://{local_ip}:{port}\n")
-    
-    # Listen on all interfaces so mobile can access via local IP
-    app.run(host="0.0.0.0", port=port, debug=True)
+    if is_local:
+        local_ip = get_local_ip()
+        print("\n🚀 Flask Seminar Server Running Locally:")
+        print(f"   Local:   http://127.0.0.1:{port}")
+        print(f"   Network: http://{local_ip}:{port}  (mobile access)\n")
+    else:
+        print("\n🚀 Flask Seminar Server Running on Render (or cloud):")
+        print(f"   URL: https://{os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'your-app.onrender.com')}\n")
 
+    # Listen on all interfaces so both local network and Render can access
+    app.run(host="0.0.0.0", port=port, debug=is_local)
