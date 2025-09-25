@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Artificial Intelligence and Higher Education — Seminar @ IUST</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='Images/robotic-hand.png') }}">
+
+  <!-- Tailwind config + CDN -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2575fc',
+            accent: '#ffb400',
+            iust: '#0f172a',
+            card: '#0b1220'
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* simple reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: transparent; }
+
+    /* Basic animations */
+    .fade-in { opacity: 0; transform: translateY(.5rem); transition: opacity 700ms ease, transform 700ms ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    .slide-left { transform: translateX(-2rem); opacity: 0; transition: transform 800ms cubic-bezier(.2,.9,.3,1), opacity 800ms; }
+    .slide-left.visible { transform: translateX(0); opacity: 1; }
+
+    /* Right → Left Shimmer for main title */
+    @keyframes gradientShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: 0% 0; }
+    }
+    .shimmer-text {
+      font-weight: bold;
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #ff99cc,
+        #ffcc99
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShimmer 4s linear infinite;
+    }
+
+    .shimmer-subtitle {
+      font-weight: normal;
+      background: linear-gradient(
+        90deg,
+        #f0f0f0,
+        #ffcce6,
+        #ffe6cc
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShimmer 8s linear infinite;
+      animation-delay: 1s;
+    }
+
+    @keyframes logoShimmerMove {
+      0% { background-position: -200% 0; opacity: 0.2; }
+      50% { background-position: 200% 0; opacity: 0.6; }
+      100% { background-position: -200% 0; opacity: 0.2; }
+    }
+    .logo-shimmer-overlay {
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      background-size: 200% 100%;
+      mix-blend-mode: screen;
+      animation: logoShimmerMove 3s infinite linear;
+    }
+  </style>
+</head>
+
+<body class="antialiased text-gray-100 bg-blue-900">
+
+  <!-- NAVBAR -->
+  <nav class="bg-blue-900/95 backdrop-blur-md shadow h-16 md:h-20 flex items-center">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between w-full">
+      <!-- Logo / Titles -->
+      <a href="#banner" class="flex items-center gap-3 md:gap-4">
+        <div class="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
+          <img src="{{ url_for('static', filename='Images/robotic-hand.png') }}" alt="AI Logo" class="w-full h-full rounded-lg logo-shimmer">
+          <div class="absolute inset-0 rounded-lg logo-shimmer-overlay"></div>
+        </div>
+        <div class="flex flex-col justify-center">
+          <div class="text-2xl md:text-3xl font-bold shimmer-text leading-tight">AIHE</div>
+          <div class="text-xs md:text-sm shimmer-subtitle leading-tight mt-0.5 md:mt-1">
+            Islamic University of Science and Technology
+          </div>
+        </div>
+      </a>
+
+      <div id="nav-links" class="hidden md:flex items-center space-x-4 text-sm text-white">
+        <a href="#themes" class="nav-link px-3 py-2 rounded hover:bg-white/10 transition">Themes</a>
+        <a href="#program" class="nav-link px-3 py-2 rounded hover:bg-white/10 transition">Program</a>
+        <a href="#speakers" class="nav-link px-3 py-2 rounded hover:bg-white/10 transition">Speakers</a>
+        <a href="#rationale" class="nav-link px-3 py-2 rounded hover:bg-white/10 transition">Rationale</a>
+        <a href="#contact" class="nav-link px-3 py-2 rounded hover:bg-white/10 transition">Contact</a>
+        <a href="#venue" class="nav-link px-3 py-2 rounded hover:bg-white/10 transition">Venue</a>
+      </div>
+
+      <div class="md:hidden flex items-center">
+        <button id="hamburger" aria-label="Toggle menu" class="p-2 rounded hover:bg-white/10">
+          <svg id="hamburger-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="hamburger-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="h-16" aria-hidden="true"></div>
+
+  <!-- Banner Section -->
+  <section id="banner" class="relative mb-12 h-[20rem] md:h-[24rem] lg:h-[28rem] overflow-hidden page-wrap rounded-3xl bg-blue-900">
+    <div class="max-w-7xl mx-auto h-full relative rounded-3xl overflow-hidden shadow-2xl">
+
+    <!-- Banner Image -->
+    <img id="bannerImg" 
+         src="{{ url_for('static', filename='Images/Banner.jpg') }}" 
+         alt="Seminar Banner" 
+         class="w-full h-full object-cover absolute inset-0 rounded-3xl">
+
+    <!-- Gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/10 via-blue-900/60 to-black/10 pointer-events-none rounded-3xl"></div>
+
+    <!-- Shimmer overlay (loading effect) -->
+    <div class="absolute inset-0 shimmer-overlay pointer-events-none animate-pulse bg-white/10 rounded-3xl"></div>
+
+    <!-- Banner Text Container (centered vertically) -->
+    <div class="absolute inset-0 flex flex-col justify-center px-6 md:px-12">
+      <div class="banner-text absolute opacity-0 transition-all duration-[1500ms] ease-out text-left"
+     style="top: calc(42% - 38px); left: calc(1.5rem + 76px);">
+  <h2 class="banner-heading text-sm md:text-base lg:text-2xl font-bold text-white opacity-0 transform translate-y-6 translate-x-1 transition-all duration-[1000ms] ease-out">
+    Artificial Intelligence & Higher Education
+  </h2>
+  <p class="banner-sub text-xs md:text-sm text-white/90 mt-1 md:mt-2 opacity-0 transform translate-y-6 translate-x-1 transition-all duration-[1000ms] ease-out">
+    Relevance and Responsible Innovation
+  </p>
+</div>
+    </div>
+
+  </div>
+
+  <!-- Banner Script -->
+  <script>
+    window.addEventListener('load', () => {
+      const bannerText = document.querySelector('.banner-text');
+      const bannerHeading = document.querySelector('.banner-heading');
+      const bannerSub = document.querySelector('.banner-sub');
+      const bannerImg = document.getElementById('bannerImg');
+      const shimmer = document.querySelector('.shimmer-overlay');
+
+      // Remove shimmer overlay after image fully loads
+      if (bannerImg.complete && shimmer) {
+        shimmer.style.opacity = '0';
+        shimmer.style.transition = 'opacity 1s ease-out';
+        setTimeout(() => shimmer.remove(), 1000);
+      }
+
+      // IntersectionObserver for scroll-triggered slide up
+      if (bannerText) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Slide up parent
+              bannerText.style.opacity = '1';
+              bannerText.style.transform = 'translateY(0)';
+
+              // Staggered fade-in for heading and subtext
+              setTimeout(() => {
+                bannerHeading.style.opacity = '1';
+                bannerHeading.style.transform = 'translateY(0)';
+              }, 300);
+              setTimeout(() => {
+                bannerSub.style.opacity = '1';
+                bannerSub.style.transform = 'translateY(0)';
+              }, 600);
+
+              obs.unobserve(entry.target); // animate only once
+            }
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(bannerText);
+      }
+    });
+  </script>
+
+  <!-- Optional CSS -->
+  <style>
+    .shimmer-overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.05) 0%,
+        rgba(255,255,255,0.1) 50%,
+        rgba(255,255,255,0.05) 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  </style>
+</section>
+
+
+  <!-- OBJECTIVES -->
+<section id="objectives" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out hover:scale-105 hover:shadow-3xl shimmer-once">
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2-8h.01M9 4h6M4 20h16a2 2 0 002-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Objectives</h2>
+        </div>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <!-- Goal 1: Forum for strategic dialogue -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center">
+    <!-- Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h6m-6 4h4m-5 4h6M4 6h16v12H4V6z" />
+    </svg>
+    <p>To create a forum for strategic dialogue on AI-higher education nexus among academia, industry, and government to align institutional AI initiatives with national policy frameworks and missions.</p>
+  </div>
+
+  <!-- Goal 2: Research and innovation priorities -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center">
+    <!-- Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3a1 1 0 00-1 1v1a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2zM9 12h6m-3-3v6M12 20h.01" />
+    </svg>
+    <p>To pinpoint key research and innovation priorities for AI-enabled higher education and research, focusing on national and regional development challenges in sectors including agriculture, healthcare, industry, disaster risk reduction, environmental sustainability and climate change resilience.</p>
+  </div>
+
+  <!-- Goal 3: Ethical & responsible AI -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center">
+    <!-- Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l8 4v6c0 5-3 9-8 11-5-2-8-6-8-11V6l8-4z" />
+    </svg>
+    <p>To raise awareness and draft institutional guidelines for the responsible, ethical, and transparent use of AI in teaching, learning, and research.</p>
+  </div>
+
+  <!-- Goal 4: Roadmaps for capacity building -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center">
+    <!-- Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7 4h10M7 8h10M7 16h10" />
+    </svg>
+    <p>To formulate concrete, actionable roadmaps for strengthening institutional capacity in AI-enabled higher education to support long-term preparedness for technological transitions and economic transformation.</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO SHOULD ATTEND -->
+<section id="whoshouldattend" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out hover:scale-105 hover:shadow-3xl shimmer-once">
+      
+      <!-- Header -->
+      <header class="mb-10 text-center">
+        <div class="flex items-center justify-center space-x-3 mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2v-5H3v5a2 2 0 002 2z" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Who Should Attend</h2>
+        </div>
+        <p class="text-sm md:text-base text-white/80">Participation will be invited from:</p>
+      </header>
+
+      <!-- Delegates / Speakers Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+  <!-- Card 1: Academic Leadership -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="0">
+    <!-- Icon: Academic cap -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zM12 14v7m0-7L3 9m9 5l9-5" />
+    </svg>
+    <strong>Academic Leadership:</strong>
+    <p>Vice-Chancellors, Directors, and Deans</p>
+  </div>
+
+  <!-- Card 2: Faculty and Researchers -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="100">
+    <!-- Icon: Book -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" />
+    </svg>
+    <strong>Faculty and Researchers:</strong>
+    <p>Professors, Assistant Professors, and Ph.D. scholars</p>
+  </div>
+
+  <!-- Card 3: Students and Young Innovators -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="200">
+    <!-- Icon: Lightbulb -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3a1 1 0 00-1 1v1a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2zM9 12h6m-3-3v6M12 20h.01" />
+    </svg>
+    <strong>Students and Young Innovators:</strong>
+    <p>Postgraduate students and research fellows</p>
+  </div>
+
+  <!-- Card 4: Policymakers and Government Officials -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="300">
+    <!-- Icon: Shield / Government -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l8 4v6c0 5-3 9-8 11-5-2-8-6-8-11V6l8-4z" />
+    </svg>
+    <strong>Policymakers and Government Officials:</strong>
+    <p>Representatives from relevant bodies</p>
+  </div>
+
+  <!-- Card 5: Industry and Technology -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="400">
+    <!-- Icon: Cog / Industry -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <strong>Industry and Technology:</strong>
+    <p>Heads from established tech firms, as well as startups, to discuss collaboration and industry needs</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE & THEMES -->
+<section id="scope" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out hover:scale-105 hover:shadow-3xl shimmer-once">
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 0a2 2 0 110 4H7a2 2 0 110-4h10z" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Proposed Scope & Structure</h2>
+        </div>
+        <p class="text-sm text-white/80 mt-2">The format will include:</p>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
+  <!-- Card 1: Keynote Addresses -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="0">
+    <!-- Icon: Microphone -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v11m0 4v4m-3-4h6m-6 0H6m6 0h6" />
+    </svg>
+    <strong>Keynote Addresses:</strong>
+    <p>Delivered by eminent leaders to set the strategic context.</p>
+  </div>
+
+  <!-- Card 2: Themed Panel Discussions -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="100">
+    <!-- Icon: Chat bubbles -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h6m-6 4h4M4 6h16v12H4V6z" />
+    </svg>
+    <strong>Themed Panel Discussions:</strong>
+    <p>Bringing together experts from different sectors to debate and share insights on critical topics.</p>
+  </div>
+
+  <!-- Card 3: Sector-Specific Sessions -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="200">
+    <!-- Icon: Puzzle / sectors -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13v-2a2 2 0 00-2-2h-3V6h-2v3H7a2 2 0 00-2 2v2a2 2 0 002 2h3v3h2v-3h3a2 2 0 002-2z" />
+    </svg>
+    <strong>Sector-Specific Sessions:</strong>
+    <p>Dedicated time to explore the application of AI in specific domains (e.g., healthcare, agrifood, manufacturing, service sectors like tourism).</p>
+  </div>
+
+  <!-- Card 4: Networking Opportunities -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="300">
+    <!-- Icon: Users / networking -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+    <strong>Networking Opportunities:</strong>
+    <p>Dedicated time for informal interactions to foster long-term collaborations.</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide-in JS -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slideCards = document.querySelectorAll('.slide-left');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // animate once
+        }
+      });
+    }, { threshold: 0.2 });
+
+    slideCards.forEach(card => observer.observe(card));
+  });
+</script>
+
+<style>
+.slide-left {
+  transform: translateX(-2rem);
+  opacity: 0;
+  transition: transform 700ms ease-out, opacity 700ms ease-out;
+}
+
+.slide-left.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+</style>
+
+<style>
+/* shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
+}
+
+.shimmer-once {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 100%);
+  background-size: 500px 100%;
+  animation: shimmer 2s linear infinite;
+}
+</style>
+
+  <!-- THEMES -->
+<section id="themes" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out shimmer-once">
+      
+      <!-- Header -->
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Key Themes / Topics</h2>
+        </div>
+        <p class="text-sm text-white/80 mt-2">Topics to be covered</p>
+      </header>
+
+      <!-- Cards Grid -->
+<div class="grid gap-6 md:grid-cols-2 justify-items-center">
+  <!-- Card 1: Curriculum Transformation -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center">
+    <!-- Icon: Academic cap -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zM12 14v7m0-7L3 9m9 5l9-5" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-3">1. Curriculum Transformation for an AI-First World:</h3>
+    <ul class="list-disc list-inside text-white/90 space-y-1">
+      <li>Reimagining pedagogy to integrate AI literacy across all disciplines.</li>
+      <li>Developing new interdisciplinary programs at the intersection of AI and other sciences.</li>
+      <li>Addressing the "employability crisis" by equipping graduates with job-ready AI skills.</li>
+    </ul>
+  </div>
+
+  <!-- Card 2: Building Robust Research Infrastructure -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="120">
+    <!-- Icon: Server / Infrastructure -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-3">2. Building Robust Research Infrastructure:</h3>
+    <ul class="list-disc list-inside text-white/90 space-y-1">
+      <li>Strategies for developing and accessing high-performance computing (HPC) clusters.</li>
+      <li>Leveraging national initiatives like the IndiaAI Dataset Platform for data-driven research.</li>
+      <li>Securing sovereign AI capabilities by building indigenous foundation models.</li>
+    </ul>
+  </div>
+
+  <!-- Card 3: Governance and Ethics -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="240">
+    <!-- Icon: Shield / Ethics -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l8 4v6c0 5-3 9-8 11-5-2-8-6-8-11V6l8-4z" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-3">3. Governance and Ethics of AI:</h3>
+    <ul class="list-disc list-inside text-white/90 space-y-1">
+      <li>Drafting institutional policies on the responsible use of AI in teaching and research.</li>
+      <li>Addressing issues of academic integrity, plagiarism, and intellectual property in an AI era.</li>
+      <li>Promoting ethical frameworks for AI development that are tailored to the Indian context.</li>
+    </ul>
+  </div>
+
+  <!-- Card 4: Academia-Industry-Government Partnerships -->
+  <div class="theme-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="360">
+    <!-- Icon: Handshake / Partnership -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11v4m4-2h-4m-8-2v4m-4-2h4m6-6l-6 6m6 0l-6-6" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-3">4. Forging Academia-Industry-Government Partnerships:</h3>
+    <ul class="list-disc list-inside text-white/90 space-y-1">
+      <li>Creating a seamless pipeline for collaborative projects and research funding.</li>
+      <li>Aligning academic research with industry needs and national development goals.</li>
+      <li>Sharing best practices for technology transfer and commercialization of AI innovations.</li>
+    </ul>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide-in JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slideCards = document.querySelectorAll('.slide-left');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  slideCards.forEach(card => observer.observe(card));
+});
+</script>
+
+<style>
+/* Gradient text for headings */
+.gradient-text {
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShimmer 4s linear infinite;
+    }
+
+/* Slide-in animation */
+.slide-left {
+  transform: translateX(-2rem);
+  opacity: 0;
+  transition: transform 700ms ease-out, opacity 700ms ease-out;
+}
+.slide-left.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Pulse-once hover effect with shadow glow */
+.theme-subcard {
+  will-change: transform, box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-subcard:hover {
+  animation: pulseOnce 0.5s forwards;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulseOnce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
+}
+</style>
+
+  <!-- EXPECTED OUTPUTS -->
+<section id="outputs" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Heading with Icon -->
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <!-- Icon for Outputs -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6m-6 0H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Expected Outputs</h2>
+        </div>
+        <p class="text-sm text-white/80 mt-2">Tangible outcomes the seminar will produce</p>
+      </header>
+
+      <!-- Output Sub-Cards -->
+<div class="grid gap-6 justify-items-center">
+  <!-- Output 1: Draft Roadmap -->
+  <div class="output-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="0">
+    <!-- Icon: Map / roadmap -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l-2-2m6 0l2 2v13m-6 0h6" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-2">1. Draft Roadmap for Institutional AI Readiness:</h3>
+    <p class="text-white/90">A document outlining actionable steps for universities to prepare their curriculum, research, and governance frameworks for the AI transition.</p>
+  </div>
+
+  <!-- Output 2: Policy Brief -->
+  <div class="output-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="120">
+    <!-- Icon: Document / policy -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2-8V6a2 2 0 00-2-2H7a2 2 0 00-2 2v2a2 2 0 002 2h8a2 2 0 002-2z" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-2">2. Policy Brief on Responsible AI in Higher Education:</h3>
+    <p class="text-white/90">A set of recommendations for policymakers on developing a national framework for AI ethics and governance in academia.</p>
+  </div>
+
+  <!-- Output 3: Published Report -->
+  <div class="output-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="240">
+    <!-- Icon: Book / report -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20h9M12 4h9M12 12h9M3 6h.01M3 12h.01M3 18h.01" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-2">3. Published Report:</h3>
+    <p class="text-white/90">A comprehensive report summarizing the seminar’s proceedings, key discussions, and final recommendations, to be shared with all stakeholders and published for wider dissemination.</p>
+  </div>
+
+  <!-- Output 4: Collaborative Network -->
+  <div class="output-subcard slide-left bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 text-center" data-delay="360">
+    <!-- Icon: Users / network -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+    <h3 class="text-xl font-bold gradient-text mb-2">4. Formation of a Collaborative Network:</h3>
+    <p class="text-white/90">The establishment of a new network of academic and industry leaders dedicated to continuing the dialogue and executing the proposed roadmap.</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide-in JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slideCards = document.querySelectorAll('.slide-left');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  slideCards.forEach(card => observer.observe(card));
+});
+</script>
+
+<style>
+/* Gradient text for headings */
+.gradient-text {
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+ -webkit-background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShimmer 4s linear infinite;
+    }
+
+/* Slide-in animation */
+.slide-left {
+  transform: translateX(-2rem);
+  opacity: 0;
+  transition: transform 700ms ease-out, opacity 700ms ease-out;
+}
+.slide-left.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Pulse-once hover effect with shadow glow */
+.output-subcard {
+  will-change: transform, box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.output-subcard:hover {
+  animation: pulseOnce 0.5s forwards;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulseOnce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
+}
+</style>
+
+
+  <!-- Reveal subcards JS -->
+  <script>
+    // Reveal subcards once (already set up above for themes; keep consistent)
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.theme-subcard, .output-subcard, .reference-subcard');
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = parseInt(entry.target.dataset.delay || '0', 10);
+            setTimeout(() => entry.target.classList.add('visible'), delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      items.forEach(i => obs.observe(i));
+    });
+  </script>
+
+  <!-- TECHNICAL PROGRAM -->
+<section id="program" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Header -->
+<header class="mb-8 text-center flex flex-col items-center">
+  <div class="flex items-center space-x-3">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 0a2 2 0 110 4H7a2 2 0 110-4h10z" />
+    </svg>
+    <h2 class="text-2xl md:text-3xl font-bold text-white">Technical Program</h2>
+  </div>
+  <p class="text-sm text-white/80 mt-2">Session-wise details and names</p>
+</header>
+
+      <!-- Days headings -->
+      <div class="grid md:grid-cols-2 gap-6 mb-6 text-center">
+        <h3 class="font-bold text-xl gradient-text">Day 1 — Inauguration & Foundational Talks</h3>
+        <h3 class="font-bold text-xl gradient-text">Day 2 — Technical & Collaborative Talks</h3>
+      </div>
+
+      <!-- Program Cards -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Day 1 -->
+        <div class="flex flex-col gap-4">
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="0">
+            <span class="font-semibold text-white">10:00 – 10:30 AM — Welcome Address: Dr. Assif Assad (IUST), Opening Remarks: Hon’ble Vice Chancellor, IUST</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="80">
+            <span class="font-semibold text-white">10:30 – 11:15 AM — Keynote I: AI and India’s National Vision — Abhishek Singh, CEO, IndiaAI Mission (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="160">
+            <span class="font-semibold text-white">11:15 – 12:00 PM — Keynote II: AI for Social Transformation — Srikanth Nadhamuni, CEO, Khosla Labs (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="240">
+            <span class="font-semibold text-white">12:00 – 12:45 PM — Session III: Technology for Social Change — Shankar Maruwada, EkStep Foundation (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="320">
+            <span class="font-semibold text-white">12:45 – 01:30 PM — Session IV: AI in Higher Education — Global Trends & Panel Discussion (IUST Faculty & Guests)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg flex justify-center items-center transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="400">
+            <span class="font-semibold text-white">01:30 – 02:30 PM — Lunch Break</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="480">
+            <span class="font-semibold text-white">02:30 – 03:15 PM — Session V: Reinforcement Learning & AI Systems — Prof. Balaraman Ravindran, IIT Madras (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="560">
+            <span class="font-semibold text-white">03:15 – 03:30 PM — Session VI: Multilingual & Multimodal AI — Prof. Mitesh Khapra, IIT Madras (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="640">
+            <span class="font-semibold text-white">04:00 – 04:30 PM — Closing Remarks (Day 1) — Chairperson, Organizing Committee (IUST)</span>
+          </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="flex flex-col gap-4">
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="0">
+            <span class="font-semibold text-white">10:00 – 10:30 AM — —</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="80">
+            <span class="font-semibold text-white">10:30 – 11:15 AM — Session VII: AI for Data-Driven Learning & Research — Prof. Sunita Sarawagi, IIT Bombay (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="160">
+            <span class="font-semibold text-white">11:15 – 12:00 PM — Session VIII: Neuro-Symbolic AI & the Future of Knowledge Systems — Prof. Mausam, IIT Delhi (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="240">
+            <span class="font-semibold text-white">12:00 – 12:45 PM — Session IX: AI for Cognitive Computing & Neuroscience Education — Dr. Tapan K. Gandhi, IIT Delhi (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="320">
+            <span class="font-semibold text-white">12:45 – 01:30 PM — Session X: Optimization & AI-Driven Innovation — Prof. Kusum Deep, IIT Roorkee (Awaited)</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg flex justify-center items-center transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="400">
+            <span class="font-semibold text-white">01:30 – 02:30 PM — Lunch Break</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="480">
+            <span class="font-semibold text-white">02:30 – 03:15 PM — Valedictory Session: Reflection and Certificates</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="560">
+            <span class="font-semibold text-white">03:15 – 03:30 PM — Vote of Thanks — Dr. Muzafar Rasool Bhat, IUST</span>
+          </div>
+          <div class="program-card slide-left bg-blue-700/60 p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="640">
+            <span class="font-semibold text-white">04:00 – 04:30 PM — —</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide-in JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slideCards = document.querySelectorAll('.slide-left');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  slideCards.forEach(card => observer.observe(card));
+});
+</script>
+
+<style>
+/* Gradient text for headings */
+.gradient-text {
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;-webkit-background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShimmer 4s linear infinite;
+}
+
+/* Slide-in animation */
+.slide-left {
+  transform: translateX(-2rem);
+  opacity: 0;
+  transition: transform 700ms ease-out, opacity 700ms ease-out;
+}
+.slide-left.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Pulse-once hover effect */
+.program-card {
+  will-change: transform, box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.program-card:hover {
+  animation: pulseOnce 0.5s forwards;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+}
+@keyframes pulseOnce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
+}
+</style>
+
+
+  <!-- SPEAKERS -->
+<section id="speakers" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Header -->
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Key-note Speakers / Resource Persons</h2>
+        </div>
+        <p class="text-sm text-white/80 mt-2">Details of speakers and resource persons</p>
+      </header>
+
+      <!-- Speaker Cards Grid -->
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Speaker 1 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="0">
+          <img src="{{ url_for('static', filename='Images/Abhishek Singh India ai mission.jpeg') }}"
+               alt="Abhishek Singh"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Abhishek Singh</h3>
+          <p class="text-white/90 text-center">CEO, IndiaAI Mission</p>
+          <p class="text-white/90"><strong>Expertise:</strong> E-Governance, Digital Transformation, AI Strategy, Policy Formulation</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> IndiaAI Mission, MeitY, Government of India</p>
+          <p class="text-white/90"><strong>Email:</strong> dg@nic.in | <strong>Contact:</strong> +91-11-24361504</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 2 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="80">
+          <img src="{{ url_for('static', filename='Images/shrikanth.jpeg') }}"
+               alt="Srikanth Nadhamuni"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Shri Srikanth Nadhamuni</h3>
+          <p class="text-white/90 text-center">CEO, Khosla Labs</p>
+          <p class="text-white/90"><strong>Expertise:</strong> E-Governance, Digital Transformation, AI Strategy, Public Systems</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> Khosla Labs Pvt Ltd</p>
+          <p class="text-white/90"><strong>Email:</strong> srikanth@khoslalabs.com | <strong>Contact:</strong> +91-9740065015</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 3 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="160">
+          <img src="{{ url_for('static', filename='Images/Shankar Maruwada.jpeg') }}"
+               alt="Shankar Maruwada"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Shri Shankar Maruwada</h3>
+          <p class="text-white/90 text-center">EkStep Foundation</p>
+          <p class="text-white/90"><strong>Expertise:</strong> Technology for Social Change, EdTech, AI for Social Good</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> EkStep Foundation</p>
+          <p class="text-white/90"><strong>Email:</strong> shankarmaruwada@gmail.com | <strong>Contact:</strong> +91-9845389067</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 4 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="240">
+          <img src="{{ url_for('static', filename='Images/Balaraman Ravindran.jpeg') }}"
+               alt="Balaraman Ravindran"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Prof. Balaraman Ravindran</h3>
+          <p class="text-white/90 text-center">Professor & Head, Robert Bosch Centre for Data Science & AI</p>
+          <p class="text-white/90"><strong>Expertise:</strong> Reinforcement Learning, Geometric Deep Learning</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> Dept of CSE, IIT Madras</p>
+          <p class="text-white/90"><strong>Email:</strong> ravi@dsai.iitm.ac.in | <strong>Contact:</strong> +91-44-22574370</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 5 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="320">
+          <img src="{{ url_for('static', filename='Images/Mitesh M. Khapra.jpg') }}"
+               alt="Mitesh Khapra"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Prof. Mitesh Khapra</h3>
+          <p class="text-white/90 text-center">Associate Professor</p>
+          <p class="text-white/90"><strong>Expertise:</strong> Deep Learning, Multimodal & Multilingual Processing</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> Dept of CSE, IIT Madras</p>
+          <p class="text-white/90"><strong>Email:</strong> miteshk@cse.iitm.ac.in | <strong>Contact:</strong> +91-44-2257-4371</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 6 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="400">
+          <img src="{{ url_for('static', filename='Images/Sunita Sarawagi.jpeg') }}"
+               alt="Sunita Sarawagi"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Prof. Sunita Sarawagi</h3>
+          <p class="text-white/90 text-center">Institute Chair Professor</p>
+          <p class="text-white/90"><strong>Expertise:</strong> Databases, Data Mining, Machine Learning, NLP</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> Dept of CSE, IIT Bombay</p>
+          <p class="text-white/90"><strong>Email:</strong> sunita@iitb.ac.in | <strong>Contact:</strong> +91-22-2576-7904</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 7 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="480">
+          <img src="{{ url_for('static', filename='Images/Prof. Mausam.jpg') }}"
+               alt="Prof. Mausam"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Prof. Mausam</h3>
+          <p class="text-white/90 text-center">Professor</p>
+          <p class="text-white/90"><strong>Expertise:</strong> Neuro-Symbolic ML, Dialog Systems, Web IE</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> Dept of CSE, IIT Delhi</p>
+          <p class="text-white/90"><strong>Email:</strong> mausam@cse.iitd.ac.in | <strong>Contact:</strong> +91-11-2659-6076</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 8 -->
+        <div class="speaker-card slide-left bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="560">
+          <img src="{{ url_for('static', filename='Images/Tapan K. Gandhi.jpg') }}"
+               alt="Tapan K. Gandhi"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-center">Dr. Tapan K. Gandhi</h3>
+          <p class="text-white/90 text-center">Cadence Chair Professor of AI</p>
+          <p class="text-white/90"><strong>Expertise:</strong> Computational Neuroscience, Cognitive Computing</p>
+          <p class="text-white/90"><strong>Affiliation:</strong> Dept of EE, IIT Delhi</p>
+          <p class="text-white/90"><strong>Email:</strong> tgandhi@iitd.ac.in | <strong>Contact:</strong> +91-11-2659-1153</p>
+          <p class="text-white/90"><strong>Status:</strong> Awaited</p>
+        </div>
+
+        <!-- Speaker 9 (full width) -->
+        <div class="speaker-card slide-left md:col-span-2 bg-blue-700/60 p-6 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer"
+             data-delay="640">
+          <img src="{{ url_for('static', filename='Images/Kusum deep iit roorke.jpg') }}"
+               alt="Prof. Kusum Deep"
+               class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+          <h3 class="font-semibold text-white text-xl md:text-2xl text-center">Prof. Kusum Deep</h3>
+          <p class="text-white/90 mt-1 text-center">Professor</p>
+          <p class="text-white/90 mt-1 text-center"><strong>Expertise:</strong> Mathematical Optimization, Nature-Inspired Techniques</p>
+          <p class="text-white/90 mt-1 text-center"><strong>Affiliation:</strong> Dept of Mathematics, IIT Roorkee</p>
+          <p class="text-white/90 mt-1 text-center"><strong>Email:</strong> kusumfma@iitr.ernet.in | <strong>Contact:</strong> Office: +91-1332-285339; Cell: 9837164078</p>
+          <p class="text-white/90 mt-1 text-center"><strong>Status:</strong> Awaited</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide-in & Hover pulse JS + CSS -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Slide-in observer (animate once)
+    const slideCards = document.querySelectorAll('.slide-left');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay || '0', 10);
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    slideCards.forEach(card => observer.observe(card));
+
+    // Pulse-once then stay scaled while hovered (JS-driven)
+    const speakers = document.querySelectorAll('.speaker-card');
+    speakers.forEach(el => {
+      // Clean up in case multiple bindings exist
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
+      function onEnter(ev) {
+        // play animation
+        el.style.animation = 'pulseOnceJS 450ms ease forwards';
+        // when animation ends, keep it scaled
+        const onEnd = () => {
+          el.style.animation = '';             // clear animation so it can re-run later
+          el.style.transform = 'scale(1.05)';  // keep scaled while hovered
+          el.removeEventListener('animationend', onEnd);
+        };
+        el.addEventListener('animationend', onEnd);
+      }
+      function onLeave() {
+        // remove forced scale, transition back smoothly
+        el.style.animation = '';
+        el.style.transform = '';
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Gradient helper (used elsewhere) */
+  .gradient-text {
+    background: linear-gradient(90deg, #ff6ec4, #7873f5);
+    -webkit-background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShimmer 4s linear infinite;
+  
+  }
+
+  /* Slide-in animation */
+  .slide-left {
+    transform: translateX(-2rem);
+    opacity: 0;
+    transition: transform 700ms cubic-bezier(.22,.9,.32,1), opacity 700ms ease-out;
+  }
+  .slide-left.visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Speaker card base styles (capsule) */
+  .speaker-card {
+    will-change: transform, box-shadow;
+    transition: transform 280ms ease, box-shadow 280ms ease;
+  }
+
+  /* Soft glow on hover (keeps while hovered via JS) */
+  .speaker-card:hover {
+    box-shadow: 0 18px 40px rgba(255,255,255,0.06), 0 6px 18px rgba(0,0,0,0.35);
+  }
+
+  /* JS-driven keyframe: scales a bit then settles to slightly larger size */
+  @keyframes pulseOnceJS {
+    0%   { transform: scale(1); }
+    45%  { transform: scale(1.08); }
+    100% { transform: scale(1.05); }
+  }
+
+  /* Accessibility: prefer-reduced-motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .slide-left, .speaker-card { transition: none !important; animation: none !important; transform: none !important; }
+  }
+</style>
+
+
+<!-- SEMINAR POSTER -->
+<section id="poster" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Heading with Icon -->
+      <div class="flex items-center justify-center mb-6 space-x-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v13h18V7H3zm3-4h12v4H6V3z" />
+        </svg>
+        <h3 class="font-semibold text-white text-xl md:text-2xl text-center">Seminar Poster</h3>
+      </div>
+
+      <!-- Poster wrapper with shimmer -->
+      <div class="poster-card relative bg-blue-700/60 rounded-xl p-6 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-300 cursor-pointer overflow-hidden">
+        <!-- Shimmer overlay -->
+        <div class="poster-shimmer absolute inset-0 bg-white/10 transform -translate-x-full rotate-12 pointer-events-none"></div>
+        <div class="flex justify-center">
+          <img
+            src="{{ url_for('static', filename='Images/Poster_Seminar_compressed.png') }}"
+            alt="Seminar Poster"
+            class="poster-image rounded-xl shadow-md w-full sm:w-[90%] md:w-[85%] lg:w-[75%] xl:w-[70%] h-auto object-contain"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Preload poster image -->
+<link rel="preload" href="{{ url_for('static', filename='Images/Poster_Seminar_compressed.png') }}" as="image">
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const posters = document.querySelectorAll('.poster-card');
+
+  posters.forEach(el => {
+    const shimmer = el.querySelector('.poster-shimmer');
+
+    el.addEventListener('mouseenter', () => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = 'pulseZoom 450ms ease forwards';
+      const onEnd = () => {
+        el.style.animation = '';
+        el.style.transform = 'scale(1.05)';
+        el.removeEventListener('animationend', onEnd);
+      };
+      el.addEventListener('animationend', onEnd);
+
+      // Start shimmer
+      shimmer.style.animation = 'shimmerMove 1s linear forwards';
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.animation = '';
+      el.style.transform = '';
+      shimmer.style.animation = '';
+      shimmer.style.transform = 'translateX(-100%) rotate(12deg)';
+    });
+  });
+});
+</script>
+
+<style>
+/* Poster card base */
+.poster-card {
+  will-change: transform, box-shadow;
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+
+.poster-card:hover {
+  box-shadow: 0 18px 40px rgba(255,255,255,0.06), 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* JS-driven pulse + zoom keyframe */
+@keyframes pulseZoom {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.12); } /* pulse up */
+  100% { transform: scale(1.05); } /* final zoom */
+}
+
+/* Poster image slight zoom on hover */
+.poster-image {
+  transition: transform 350ms ease;
+}
+
+.poster-card:hover .poster-image {
+  transform: scale(1.03);
+}
+
+/* Shimmer effect */
+.poster-shimmer {
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+}
+
+@keyframes shimmerMove {
+  0% { transform: translateX(-100%) rotate(12deg); }
+  100% { transform: translateX(200%) rotate(12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster-card, .poster-image, .poster-shimmer { transition: none !important; animation: none !important; transform: none !important; }
+}
+</style>
+
+
+<!-- PARTICIPATION DETAILS -->
+<section id="participation" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm
+                transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Header -->
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white" data-animate>Delegates as Speakers</h2>
+        </div>
+        <p class="text-sm text-white/80 mt-2" data-animate data-delay="80">Breakdown of delegates attending the seminar</p>
+      </header>
+
+      <!-- Cards Grid -->
+      <div class="flex flex-col items-center gap-6">
+        <!-- Delegates Card (Full Width) -->
+        <div class="finance-card delegate-card flex flex-col items-center justify-center w-full md:w-3/4 p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center"
+             data-animate data-delay="100">
+          <div class="flex items-center justify-center space-x-2 mb-2">
+            <!-- Multiple small person icons -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-1a4 4 0 00-4-4h-1M9 20H4v-1a4 4 0 014-4h1M12 12a4 4 0 100-8 4 4 0 000 8z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-1a4 4 0 00-4-4h-1M9 20H4v-1a4 4 0 014-4h1M12 12a4 4 0 100-8 4 4 0 000 8z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-1a4 4 0 00-4-4h-1M9 20H4v-1a4 4 0 014-4h1M12 12a4 4 0 100-8 4 4 0 000 8z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white text-xl md:text-2xl">Delegates</h3>
+          <p class="text-white/90 mt-1">Total Delegates Attending: 10</p>
+        </div>
+
+        <!-- Scientists Cards Row -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full">
+          <!-- Young Scientists -->
+          <div class="finance-card delegate-card flex flex-col items-center justify-center w-full md:w-1/3 p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center"
+               data-animate data-delay="200">
+            <!-- Single-person icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12a4 4 0 100-8 4 4 0 000 8zM6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1" />
+            </svg>
+            <h3 class="font-semibold text-white text-lg md:text-xl">Young Scientists (&lt;35 years)</h3>
+            <p class="text-white/90 mt-1 text-sm md:text-base">3</p>
+          </div>
+
+          <!-- Senior Scientists -->
+          <div class="finance-card delegate-card flex flex-col items-center justify-center w-full md:w-1/3 p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center"
+               data-animate data-delay="300">
+            <!-- Single-person icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12a4 4 0 100-8 4 4 0 000 8zM6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1" />
+            </svg>
+            <h3 class="font-semibold text-white text-lg md:text-xl">Senior Scientists</h3>
+            <p class="text-white/90 mt-1 text-sm md:text-base">7</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Slide-in on scroll once */
+.slide-in-once {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.slide-in-once.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Pulse/zoom effect on hover */
+.delegate-card {
+  transition: transform 0.3s ease;
+}
+.delegate-card:hover {
+  transform: scale(1.05);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const slideCards = document.querySelectorAll(".slide-in-once");
+  const slideInOnceObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        setTimeout(() => {
+          entry.target.classList.add("visible");
+        }, entry.target.dataset.delay || 0);
+        slideInOnceObserver.unobserve(entry.target); // slide in only once
+      }
+    });
+  }, { threshold: 0.2 });
+
+  slideCards.forEach(card => slideInOnceObserver.observe(card));
+});
+</script>
+
+<style>
+/* Slide-in on scroll once */
+.slide-in-once {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.slide-in-once.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Pulse/heartbeat effect while hovered */
+@keyframes pulseZoom {
+  0%, 100% { transform: scale(1.05); }
+  50% { transform: scale(1.08); }
+}
+
+.delegate-card {
+  transition: transform 0.3s ease;
+}
+
+/* Apply pulse animation only while hovered */
+.delegate-card:hover {
+  animation: pulseZoom 1s infinite;
+  transform: scale(1.05); /* ensure it starts zoomed in */
+}
+</style>
+
+
+<!-- RATIONALE -->
+<section id="rationale" class="pt-12 pb-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card slide-up shimmer-once bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform hover:scale-105 hover:shadow-3xl overflow-visible">
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Rationale</h2>
+        </div>
+      </header>
+
+      <div class="space-y-4 text-justify text-white/90">
+        <p><strong class="shimmer-slow">Artificial Intelligence (AI)</strong> is transforming education, research, and governance globally. In India, initiatives like <span class="shimmer-slow">IndiaAI Mission</span>, <span class="shimmer-slow">ANRF Act</span>, <span class="shimmer-slow">NEP 2020</span>, and <span class="shimmer-slow">DPDP Act</span> are driving innovation, building human capacity, and enabling ethical, data-driven AI adoption.</p>
+
+        <p>Higher education institutions play a crucial role by preparing the next generation of <span class="shimmer-slow">researchers</span>, <span class="shimmer-slow">professionals</span>, and <span class="shimmer-slow">policymakers</span>, and by applying <span class="shimmer-slow">AI</span> to critical challenges such as <span class="shimmer-slow">jobs</span>, <span class="shimmer-slow">health</span>, <span class="shimmer-slow">education</span>, <span class="shimmer-slow">nutrition</span>, <span class="shimmer-slow">climate</span>, and <span class="shimmer-slow">sustainable development</span>. Success requires updated curricula, research infrastructure, ethical AI practices, and collaborations with industry and national missions.</p>
+
+        <p>This seminar provides a platform for <span class="shimmer-slow">academic leaders</span>, <span class="shimmer-slow">faculty</span>, <span class="shimmer-slow">students</span>, <span class="shimmer-slow">policymakers</span>, and <span class="shimmer-slow">industry experts</span> to discuss institutional readiness, research priorities, and actionable strategies. By aligning universities with national AI goals, higher education institutions can foster <span class="shimmer-slow">innovation</span>, <span class="shimmer-slow">responsible adoption</span>, and balanced socio-economic development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Slow, subtle shimmer for key terms */
+@keyframes shimmerSlow {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+.shimmer-slow {
+  display: inline-block;
+  background-image: linear-gradient(90deg, #ffffff, #ffb6b9, #ffd7a8, #ffffff);
+  background-size: 400px 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shimmerSlow 4s linear infinite;
+}
+</style>
+
+<!-- Slide-up Animation JS -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slideCards = document.querySelectorAll('.slide-up');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 200); // slight delay
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    slideCards.forEach(card => observer.observe(card));
+  });
+</script>
+
+<style>
+.slide-up {
+  transform: translateY(4rem);
+  opacity: 0;
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.5s ease-in-out;
+}
+
+.slide-up.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+</style>
+
+
+<!-- REFERENCES -->
+<section id="references" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Heading with Icon -->
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <!-- Icon for References -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3v6h6v-6c0-1.657-1.343-3-3-3zM12 2a9 9 0 00-9 9v3h18v-3a9 9 0 00-9-9z" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Leading References</h2>
+        </div>
+      </header>
+
+      <!-- References Sub-Cards -->
+      <div class="grid gap-6">
+        <!-- Reference 1 -->
+        <div class="reference-subcard slide-left bg-blue-700/60 rounded-xl p-4 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105" data-delay="0">
+          <p class="text-white/90">National Education Policy (NEP) 2020: Government of India.</p>
+        </div>
+
+        <!-- Reference 2 -->
+        <div class="reference-subcard slide-left bg-blue-700/60 rounded-xl p-4 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105" data-delay="120">
+          <p class="text-white/90">Digital Personal Data Protection (DPDP) Act, 2023: Government of India.</p>
+        </div>
+
+        <!-- Reference 3 -->
+        <div class="reference-subcard slide-left bg-blue-700/60 rounded-xl p-4 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105" data-delay="240">
+          <p class="text-white/90">"National Strategy for Artificial Intelligence" (2018): NITI Aayog.</p>
+        </div>
+
+        <!-- Reference 4 -->
+        <div class="reference-subcard slide-left bg-blue-700/60 rounded-xl p-4 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105" data-delay="360">
+          <p class="text-white/90">"Transforming and Reforming the Indian Education System with Artificial Intelligence": Published academic papers on this topic.</p>
+        </div>
+
+        <!-- Reference 5 -->
+        <div class="reference-subcard slide-left bg-blue-700/60 rounded-xl p-4 border border-white/20 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105" data-delay="480">
+          <p class="text-white/90">"India's AI Revolution": Press Information Bureau (PIB) reports on the IndiaAI Mission.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Slide-in JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slideCards = document.querySelectorAll('.slide-left');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  slideCards.forEach(card => observer.observe(card));
+});
+</script>
+
+<style>
+/* Slide-in animation */
+.slide-left {
+  transform: translateX(-2rem);
+  opacity: 0;
+  transition: transform 700ms ease-out, opacity 700ms ease-out;
+}
+.slide-left.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Pulse-once hover effect with shadow glow */
+.reference-subcard {
+  will-change: transform, box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reference-subcard:hover {
+  animation: pulseOnce 0.5s forwards;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulseOnce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
+}
+</style>
+
+
+<!-- CONTACT DETAILS -->
+<section id="contact" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm
+                transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Header -->
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white" data-animate>Contact</h2>
+        </div>
+        <p class="text-sm text-white/80 mt-2" data-animate data-delay="80">Reach out to our AI faculty members</p>
+      </header>
+
+      <!-- Contact Cards -->
+      <div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full">
+        <!-- Dr. Assif Assad -->
+<div class="contact-card delegate-card flex flex-col items-center justify-center w-full md:w-1/2 p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once" data-delay="100">
+  <img src="{{ url_for('static', filename='Images/Assif Assad.jpeg') }}" alt="Dr. Assif Assad" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover">
+  <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Assif Assad</h3>
+  <p class="text-white/80 text-sm italic mb-2">Coordinator</p>
+  <p class="text-white/90 text-sm md:text-base mb-1 text-center">Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India</p>
+  <a href="mailto:assif.assad@islamicuniversity.edu.in" class="text-white underline hover:text-white/80 mb-1">assif.assad@islamicuniversity.edu.in</a>
+  <p class="text-white/90 text-sm md:text-base">📞 +91 7889589200</p>
+</div>
+
+<!-- Dr. Muzaffar Rasool -->
+<div class="contact-card delegate-card flex flex-col items-center justify-center w-full md:w-1/2 p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once" data-delay="200">
+  <img src="{{ url_for('static', filename='Images/Muzafar Rasool.jpeg') }}" alt="Dr. Muzaffar Rasool" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover">
+  <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Muzaffar Rasool</h3>
+  <p class="text-white/80 text-sm italic mb-2">Assistant Professor</p>
+  <p class="text-white/90 text-sm md:text-base mb-1 text-center">Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India</p>
+  <a href="mailto:muzafar.rasool@islamicuniversity.edu.in" class="text-white underline hover:text-white/80 mb-1">muzafar.rasool@islamicuniversity.edu.in</a>
+  <p class="text-white/90 text-sm md:text-base">📞 +91 8825069068</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="bg-blue-900 text-white mt-0">
+  <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <div>
+      <div class="text-center">
+  <h3 class="font-semibold text-white text-xl md:text-2xl mb-3">Contact</h3>
+  <p class="text-white/80 text-sm leading-relaxed">
+    <span class="block">📍 1-University Avenue, Awantipora, Pulwama</span>
+    <span class="block">Pin: 192122, Jammu & Kashmir</span>
+    <span class="block">GPO (Srinagar), Post Box No. 89</span>
+  </p>
+</div>
+    </div>
+
+<div class="text-center max-w-md mx-auto">
+  <h3 class="font-semibold text-white text-xl md:text-2xl mb-3">Venue</h3>
+  <p class="text-white/80 text-sm leading-relaxed">
+    <span class="block mb-1">Nund-Reshi Auditorium</span>
+    <span class="block">Academic Block – VII</span>
+  </p>
+</div>
+
+    <div>
+      <div class="text-center">
+  <h3 class="font-semibold text-white text-xl md:text-2xl mb-3">Reach us at:</h3>
+<p class="text-white/80 text-sm">
+  🌐 Website: 
+  <a class="underline hover:text-white transition" href="https://www.iust.ac.in" target="_blank">iust.ac.in</a>
+</p>
+<p class="text-white/80 text-sm mt-1">
+  ✉️ Email: 
+  <a class="underline hover:text-white transition" href="mailto:info@iust.ac.in">info@iust.ac.in</a>
+</p>
+<p class="text-white/80 text-sm mt-1">
+  📞 Phone: +91 (01933) 247954 / 247955
+</p>
+</div>
+
+    </div>
+  </div>
+
+
+  <!-- Location / Map Section -->
+<section id="location" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Main Card -->
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm
+                transform transition-all duration-1000 ease-out shimmer-once">
+      <!-- Heading with icon -->
+      <h2 class="text-2xl font-bold text-white flex items-center justify-center gap-2 mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 
+          9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 
+          14.5 7.62 14.5 9 13.38 11.5 12 11.5z"/>
+        </svg>
+        Our Location
+      </h2>
+
+      <!-- Sub Card (Address + Map) -->
+      <div class="bg-blue-800/60 rounded-2xl p-6 border border-white/10 shadow-lg slide-up" data-animate>
+        <!-- Address -->
+        <p class="text-white/90 mb-6">
+          1-University Avenue, Awantipora, Pulwama<br>
+          Pin: 192122, Jammu & Kashmir
+        </p>
+
+        <!-- Google Map Embed -->
+        <div class="relative w-full h-64 rounded-xl overflow-hidden border border-white/20 shadow-md">
+          <iframe
+            class="w-full h-full"
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+            src="https://www.google.com/maps?q=1-University+Avenue,+Awantipora,+Pulwama,+Jammu+&+Kashmir,+192122&output=embed"
+          ></iframe>
+
+          <!-- Clickable Marker overlay (bottom center) -->
+          <a href="https://maps.google.com/?q=1-University+Avenue,+Awantipora,+Pulwama,+Jammu+and+Kashmir,+192122" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+            <div class="relative group">
+              <!-- Ping effect -->
+              <span class="absolute inline-flex h-12 w-12 rounded-full bg-red-500 opacity-75 animate-ping"></span>
+              <!-- Marker icon with hover glow -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 relative transition duration-300 group-hover:drop-shadow-[0_0_20px_rgba(255,0,0,0.7)]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 
+                9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 
+                14.5 7.62 14.5 9 13.38 11.5 12 11.5z"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Scroll-trigger animation JS -->
+<script>
+  const animateElements = document.querySelectorAll('[data-animate]');
+  const animateObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (entry.target.classList.contains('slide-left')) {
+          entry.target.classList.add('slide-in');
+        }
+        if (entry.target.classList.contains('slide-up')) {
+          entry.target.classList.add('fade-up');
+        }
+        animateObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  animateElements.forEach(el => animateObserver.observe(el));
+</script>
+
+<!-- Tailwind additional styles -->
+<style>
+  /* Slide-in left */
+  .slide-left { transform: translateX(-50px); opacity: 0; transition: all 0.8s ease-out; }
+  .slide-in { transform: translateX(0); opacity: 1; animation: bounceEffect 0.6s; }
+
+  /* Fade-up animation */
+  .slide-up { transform: translateY(30px); opacity: 0; transition: all 0.8s ease-out; }
+  .fade-up { transform: translateY(0); opacity: 1; animation: fadeBounce 0.6s; }
+
+  /* Bounce for main card */
+  @keyframes bounceEffect {
+    0% { transform: translateY(-10px); }
+    50% { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Subtle bounce for subcard */
+  @keyframes fadeBounce {
+    0% { transform: translateY(20px); opacity: 0; }
+    50% { transform: translateY(-5px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+</style>
+
+
+  <!-- SOCIAL LINKS -->
+<section id="social" class="py-12 bg-blue-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-card bg-blue-800/80 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl backdrop-blur-sm transform transition-all duration-1000 ease-out shimmer-once">
+
+      <!-- Header inside card -->
+      <header class="mb-8 text-center flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <h2 class="text-2xl md:text-3xl font-bold text-white">Social</h2>
+        </div>
+        <p class="text-sm text-white/80 mt-2">Connect with us on social media</p>
+      </header>
+
+      <!-- Social Icons -->
+      <div class="flex flex-wrap justify-center items-center gap-6 mt-6 social-icons">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/iustjk" target="_blank" class="hover:scale-110 transition transform slide-up" data-delay="0">
+          <img src="{{ url_for('static', filename='Images/facebook.png') }}" alt="Facebook" class="h-10 w-10">
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/iust_kashmir/" target="_blank" class="hover:scale-110 transition transform slide-up" data-delay="100">
+          <img src="{{ url_for('static', filename='Images/instagram.png') }}" alt="Instagram" class="h-10 w-10">
+        </a>
+        <!-- X / Twitter -->
+        <a href="https://x.com/iustjk" target="_blank" class="hover:scale-110 transition transform slide-up" data-delay="200">
+          <img src="{{ url_for('static', filename='Images/twitter.png') }}" alt="X / Twitter" class="h-10 w-10">
+        </a>
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/c/IUSTJK" target="_blank" class="hover:scale-110 transition transform slide-up" data-delay="300">
+          <img src="{{ url_for('static', filename='Images/youtube.png') }}" alt="YouTube" class="h-10 w-10">
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/school/iustjk" target="_blank" class="hover:scale-110 transition transform slide-up" data-delay="400">
+          <img src="{{ url_for('static', filename='Images/linkedin.png') }}" alt="LinkedIn" class="h-10 w-10">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<style>
+/* Slide-up animation */
+.slide-up {
+  transform: translateY(2rem);
+  opacity: 0;
+  transition: transform 800ms ease, opacity 800ms ease;
+}
+
+.slide-up.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+  /* Hover zoom effect for icons */
+  #social a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  #social a:hover {
+    transform: scale(1.15);
+  }
+
+  #social img {
+    transition: transform 0.3s ease;
+  }
+</style>
+
+<script>
+  const icons = document.querySelectorAll('.slide-up');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const delay = entry.target.getAttribute('data-delay') || 0;
+      if(entry.isIntersecting){
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, delay);
+      } else {
+        // remove class when out of view to re-trigger animation
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  icons.forEach(icon => observer.observe(icon));
+</script>
+
+
+<!-- Footer -->
+<footer class="bg-blue-950 text-white">
+  <div class="max-w-6xl mx-auto px-6 py-8 md:py-12 flex flex-col items-center gap-4">
+
+    <!-- Divider Line -->
+    <div class="w-24 h-0.5 bg-blue-700 mb-4"></div>
+
+    <!-- Copyright -->
+    <p class="text-sm md:text-base text-center">&copy; 2025 Islamic University of Science and Technology. All rights reserved.</p>
+    
+    <!-- Designer Info -->
+    <div class="slide-up-once text-center mt-2">
+      <p class="font-bold text-lg md:text-xl mb-1">Designed and Developed by Amir Mushtaq</p>
+      <p class="text-white/80 text-sm md:text-base flex flex-col md:flex-row items-center justify-center gap-2">
+        <span>🎓 M.Tech AI, Centre for Artificial Intelligence</span>
+        <span>🏛️ Islamic University of Science and Technology</span>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+/* Slide-up animation */
+.slide-up-once {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.slide-up-once.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Optional: smooth hover effect for footer */
+footer p {
+  transition: color 0.3s ease;
+}
+footer p:hover {
+  color: #60a5fa; /* Tailwind blue-400 */
+}
+
+/* Divider Line */
+footer .w-24 {
+  transition: width 0.5s ease;
+}
+footer .w-24:hover {
+  width: 32px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  footer .flex-col.md\\:flex-row {
+    flex-direction: column;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const slideUpElements = document.querySelectorAll(".slide-up-once");
+  const slideUpOnceObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+        slideUpOnceObserver.unobserve(entry.target); // animate only once
+      }
+    });
+  }, { threshold: 0.2 });
+
+  slideUpElements.forEach(el => slideUpOnceObserver.observe(el));
+});
+</script>
+
+
+<!-- Back to top button -->
+<button id="backToTop" 
+        class="hidden fixed bottom-6 right-6 
+               w-14 h-14 flex items-center justify-center 
+               bg-white/30 backdrop-blur-lg text-white 
+               rounded-full shadow-lg border border-white/40 
+               hover:scale-110 hover:shadow-2xl transition-all duration-300 
+               animate-pulse cursor-pointer"
+        aria-label="Back to top">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300 text-white" fill="none" 
+       viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+
+<script>
+  // Remove duplicate declaration of backToTop
+  const arrow = document.getElementById('backToTop').querySelector('svg');
+
+  // Show/hide button based on scroll
+  window.addEventListener('scroll', () => {
+    const backToTop = document.getElementById('backToTop');
+    if (window.scrollY > 300) {
+      backToTop.classList.remove('hidden', 'opacity-0');
+      backToTop.classList.add('opacity-100');
+    } else {
+      backToTop.classList.add('opacity-0');
+      backToTop.classList.remove('opacity-100');
+      setTimeout(() => backToTop.classList.add('hidden'), 300);
+    }
+  });
+
+  // Scroll to top on click
+  document.getElementById('backToTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Arrow rotation on hover
+  document.getElementById('backToTop').addEventListener('mouseenter', () => {
+    arrow.classList.add('rotate-180');
+  });
+  document.getElementById('backToTop').addEventListener('mouseleave', () => {
+    arrow.classList.remove('rotate-180');
+  });
+</script>
+
+<style>
+  #backToTop {
+    opacity: 0;
+  }
+</style>
+
+  <!-- =========================
+       CUSTOM CSS (moved to end as requested)
+       ========================= -->
+  <style>
+    /* Animated blobs & entrance */
+    @keyframes blob {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(30px,-50px) scale(1.05); }
+      66% { transform: translate(-20px,30px) scale(0.95); }
+    }
+    .animate-blob { animation: blob 8s infinite; }
+    .animation-delay-2000 { animation-delay: 2s; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .animate-fade-in { animation: fadeIn 1.2s ease-out forwards; }
+
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-slide-up { animation: slideUp 1s ease-out forwards; }
+    .animation-delay-200 { animation-delay: 0.2s; }
+
+    /* Section hover elevation (subtle, professional) */
+    .section-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .section-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(2,6,23,0.18);
+    }
+
+    /* Back to top small tweaks */
+    #backToTop {
+      z-index: 60;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+    #backToTop:hover { transform: translateY(-3px); }
+
+    /* Fade slide up for other elements */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-slide-up {
+      animation-name: fadeSlideUp;
+      animation-duration: 800ms;
+      animation-timing-function: cubic-bezier(.2,.9,.2,1);
+      animation-fill-mode: both;
+    }
+
+    /* Slide in from left for Developed by AMIR */
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-100px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .slide-in-left {
+      animation-name: slideInLeft;
+      animation-duration: 800ms;
+      animation-timing-function: cubic-bezier(.2,.9,.2,1);
+      animation-fill-mode: both;
+    }
+
+    /* Parallax helper */
+    .parallax {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-blob, .animate-fade-in, .animate-slide-up, .fade-slide-up, .slide-in-left { animation: none !important; }
+    }
+
+    /* small helper to show/hide mobile menu transitions */
+    #mobile-menu { transition: max-height .25s ease; }
+  
+    /* Hero background image fix */
+    .hero-bg {
+      background-image: url("/static/Images/hero-bg.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+
+  <!-- =========================
+       CUSTOM JS (moved to end as requested)
+       ========================= -->
+  <script>
+    // Elements
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerOpen = document.getElementById('hamburger-open');
+    const hamburgerClose = document.getElementById('hamburger-close');
+    const backToTop = document.getElementById('backToTop');
+
+    // Toggle mobile menu
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        if (mobileMenu) mobileMenu.classList.toggle('hidden');
+        if (hamburgerOpen) hamburgerOpen.classList.toggle('hidden');
+        if (hamburgerClose) hamburgerClose.classList.toggle('hidden');
+      });
+    }
+
+    // Smooth scroll for internal links and auto-close mobile menu
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // close mobile menu when link clicked (mobile)
+          if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            if (hamburgerOpen) hamburgerOpen.classList.remove('hidden');
+            if (hamburgerClose) hamburgerClose.classList.add('hidden');
+          }
+        }
+      });
+    });
+
+    // Back-to-top visibility and action
+    window.addEventListener('scroll', () => {
+      if (!backToTop) return;
+      if (window.scrollY > 300) {
+        backToTop.classList.remove('hidden');
+        backToTop.classList.add('opacity-100');
+      } else {
+        backToTop.classList.add('hidden');
+      }
+    });
+    if (backToTop) {
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Single intersection observer: reveal elements and highlight nav
+    (function() {
+      const animated = document.querySelectorAll('[data-animate]');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const el = entry.target;
+          if (entry.isIntersecting) {
+            const delay = parseInt(el.getAttribute('data-delay') || 0);
+            setTimeout(() => {
+              // Special case: dev credit slide-in-left
+              if (el.id === 'devCredit' || el.querySelector('.font-semibold')) {
+                el.classList.add('slide-in-left');
+              } else {
+                el.classList.add('fade-slide-up');
+              }
+              el.classList.remove('opacity-0', 'translate-y-4');
+            }, delay);
+
+            // highlight nav when section visible (if section has id)
+            if (el.id) {
+              navLinks.forEach(a => {
+                const href = a.getAttribute('href');
+                if (href === '#' + el.id) {
+                  a.classList.add('bg-white/6', 'text-white', 'rounded');
+                } else {
+                  a.classList.remove('bg-white/6');
+                }
+              });
+            }
+          }
+        });
+      }, { threshold: 0.12 });
+
+      animated.forEach(el => observer.observe(el));
+    })();
+
+    // Simple active link on scroll (works with sections having id)
+    (function() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('text-accent');
+              } else {
+                link.classList.remove('text-accent');
+              }
+            });
+          }
+        });
+      }, { rootMargin: "-30% 0px -50% 0px", threshold: 0 });
+
+      sections.forEach(s => io.observe(s));
+    })();
+  </script>
+</body>
+</html>
