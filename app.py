@@ -38,11 +38,16 @@ def get_local_ip():
     return local_ip
 
 
+import os
+
 if __name__ == "__main__":
     local_ip = get_local_ip()
+    port = int(os.environ.get("PORT", 5000))  # Use Render's assigned port if available
+
     print("\n🚀 Flask Seminar Server Running:")
-    print(f"   Local:   http://127.0.0.1:5000")
-    print(f"   Network: http://{local_ip}:5000\n")
+    print(f"   Local:   http://127.0.0.1:{port}")
+    print(f"   Network: http://{local_ip}:{port}\n")
     
     # Listen on all interfaces so mobile can access via local IP
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=True)
+

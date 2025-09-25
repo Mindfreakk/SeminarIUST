@@ -53,6 +53,9 @@
       background-size: 200% 100%;
       -webkit-background-clip: text;
       background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: gradientShimmer 4s linear infinite;
     }
@@ -234,6 +237,41 @@
 </section>
 
 
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
+
   <!-- OBJECTIVES -->
 <section id="objectives" class="py-12 bg-blue-900">
   <div class="max-w-6xl mx-auto px-6">
@@ -287,6 +325,40 @@
     </div>
   </div>
 </section>
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
 
 <!-- WHO SHOULD ATTEND -->
 <section id="whoshouldattend" class="py-12 bg-blue-900">
@@ -359,6 +431,42 @@
     </div>
   </div>
 </section>
+
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
 
 <!-- SCOPE & THEMES -->
 <section id="scope" class="py-12 bg-blue-900">
@@ -463,6 +571,42 @@
   animation: shimmer 2s linear infinite;
 }
 </style>
+
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
 
   <!-- THEMES -->
 <section id="themes" class="py-12 bg-blue-900">
@@ -602,6 +746,42 @@ document.addEventListener('DOMContentLoaded', () => {
   100% { transform: scale(1.05); }
 }
 </style>
+
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
 
   <!-- EXPECTED OUTPUTS -->
 <section id="outputs" class="py-12 bg-blue-900">
@@ -745,6 +925,42 @@ document.addEventListener('DOMContentLoaded', () => {
       items.forEach(i => obs.observe(i));
     });
   </script>
+
+
+  <!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
 
   <!-- TECHNICAL PROGRAM -->
 <section id="program" class="py-12 bg-blue-900">
@@ -895,6 +1111,41 @@ document.addEventListener('DOMContentLoaded', () => {
   100% { transform: scale(1.05); }
 }
 </style>
+
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
 
 
   <!-- SPEAKERS -->
@@ -1140,6 +1391,41 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
+
 <!-- SEMINAR POSTER -->
 <section id="poster" class="py-12 bg-blue-900">
   <div class="max-w-6xl mx-auto px-6">
@@ -1246,6 +1532,41 @@ document.addEventListener('DOMContentLoaded', () => {
   .poster-card, .poster-image, .poster-shimmer { transition: none !important; animation: none !important; transform: none !important; }
 }
 </style>
+
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
 
 
 <!-- PARTICIPATION DETAILS -->
@@ -1384,6 +1705,41 @@ document.addEventListener("DOMContentLoaded", function() {
 </style>
 
 
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
+
 <!-- RATIONALE -->
 <section id="rationale" class="pt-12 pb-12 bg-blue-900">
   <div class="max-w-6xl mx-auto px-6">
@@ -1457,6 +1813,41 @@ document.addEventListener("DOMContentLoaded", function() {
   opacity: 1;
 }
 </style>
+
+
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
 
 
 <!-- REFERENCES -->
@@ -1556,6 +1947,41 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 
+<!-- Full-width Flowing Water Divider with Stronger Waves -->
+<div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
+  <svg class="absolute w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <!-- Gradient for subtle depth -->
+      <linearGradient id="dividerGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0f0f0" stop-opacity="0.1"/>
+      </linearGradient>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+      </filter>
+    </defs>
+
+    <!-- Primary strong wavy layer -->
+    <path fill="url(#dividerGradient)" filter="url(#shadow)">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z;
+        M0,100 L60,140 C120,180 240,260 360,240 C480,220 600,140 720,120 C840,100 960,180 1080,200 C1200,220 1320,180 1380,160 L1440,140 L1440,320 L0,320 Z;
+        M0,120 L60,160 C120,200 240,280 360,260 C480,240 600,160 720,140 C840,120 960,200 1080,220 C1200,240 1320,200 1380,180 L1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+    <!-- Secondary semi-transparent wavy layer -->
+    <path fill="url(#dividerGradient)" opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z;
+        M0,110 L60,150 C120,190 240,270 360,250 C480,230 600,150 720,130 C840,110 960,190 1080,210 C1200,230 1320,190 1380,170 L1440,150 L1440,320 L0,320 Z;
+        M0,130 L60,170 C120,210 240,290 360,270 C480,250 600,170 720,150 C840,130 960,210 1080,230 C1200,250 1320,210 1380,190 L1440,170 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
+</div>
+
+
 <!-- CONTACT DETAILS -->
 <section id="contact" class="py-12 bg-blue-900">
   <div class="max-w-6xl mx-auto px-6">
@@ -1637,45 +2063,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- FOOTER -->
 <footer class="bg-blue-900 text-white mt-0">
-  <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-    
-    <div>
-      <div class="text-center">
-  <h3 class="font-semibold text-white text-xl md:text-2xl mb-3">Contact</h3>
-  <p class="text-white/80 text-sm leading-relaxed">
-    <span class="block">📍 1-University Avenue, Awantipora, Pulwama</span>
-    <span class="block">Pin: 192122, Jammu & Kashmir</span>
-    <span class="block">GPO (Srinagar), Post Box No. 89</span>
-  </p>
-</div>
+  <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+
+    <!-- Contact Info -->
+    <div class="text-center" id="contact">
+      <h3 class="font-semibold text-xl md:text-2xl mb-3">Contact</h3>
+      <p class="text-white/80 text-sm leading-relaxed">
+        📍 1-University Avenue, Awantipora, Pulwama<br>
+        Pin: 192122, Jammu & Kashmir<br>
+        GPO (Srinagar), Post Box No. 89
+      </p>
     </div>
 
-<div class="text-center max-w-md mx-auto">
-  <h3 class="font-semibold text-white text-xl md:text-2xl mb-3">Venue</h3>
-  <p class="text-white/80 text-sm leading-relaxed">
-    <span class="block mb-1">Nund-Reshi Auditorium</span>
-    <span class="block">Academic Block – VII</span>
-  </p>
-</div>
-
-    <div>
-      <div class="text-center">
-  <h3 class="font-semibold text-white text-xl md:text-2xl mb-3">Reach us at:</h3>
-<p class="text-white/80 text-sm">
-  🌐 Website: 
-  <a class="underline hover:text-white transition" href="https://www.iust.ac.in" target="_blank">iust.ac.in</a>
-</p>
-<p class="text-white/80 text-sm mt-1">
-  ✉️ Email: 
-  <a class="underline hover:text-white transition" href="mailto:info@iust.ac.in">info@iust.ac.in</a>
-</p>
-<p class="text-white/80 text-sm mt-1">
-  📞 Phone: +91 (01933) 247954 / 247955
-</p>
-</div>
-
+    <!-- Venue Info -->
+    <div class="text-center" id="venue">
+      <h3 class="font-semibold text-xl md:text-2xl mb-3">Venue</h3>
+      <p class="text-white/80 text-sm leading-relaxed">
+        <span class="block mb-1">Nund-Reshi Auditorium</span>
+        <span class="block">Academic Block – VII</span>
+      </p>
     </div>
+
+    <!-- Reach Us -->
+    <div class="text-center">
+      <h3 class="font-semibold text-xl md:text-2xl mb-3">Reach us at:</h3>
+      <p class="text-white/80 text-sm">
+        🌐 Website: 
+        <a class="underline hover:text-white transition" href="https://www.iust.ac.in" target="_blank">iust.ac.in</a>
+      </p>
+      <p class="text-white/80 text-sm mt-1">
+        ✉️ Email: 
+        <a class="underline hover:text-white transition" href="mailto:info@iust.ac.in">info@iust.ac.in</a>
+      </p>
+      <p class="text-white/80 text-sm mt-1">
+        📞 Phone: +91 (01933) 247954 / 247955
+      </p>
+    </div>
+
   </div>
+</footer>
+
 
 
   <!-- Location / Map Section -->
@@ -1877,25 +2304,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Footer -->
 <footer class="bg-blue-950 text-white">
-  <div class="max-w-6xl mx-auto px-6 py-8 md:py-12 flex flex-col items-center gap-4">
+  <div class="max-w-6xl mx-auto px-6 py-6 md:py-8 flex flex-col md:flex-row items-center justify-between gap-4 slide-up-once">
 
-    <!-- Divider Line -->
-    <div class="w-24 h-0.5 bg-blue-700 mb-4"></div>
+    <!-- Left: Copyright -->
+    <div class="text-left flex-1">
+      <p class="text-sm md:text-base mb-0">© 2025 Islamic University of Science and Technology.</p>
+      <p class="text-xs md:text-sm text-white/60 mt-0">All rights reserved.</p>
+    </div>
 
-    <!-- Copyright -->
-    <p class="text-sm md:text-base text-center">&copy; 2025 Islamic University of Science and Technology. All rights reserved.</p>
-    
-    <!-- Designer Info -->
-    <div class="slide-up-once text-center mt-2">
-      <p class="font-bold text-lg md:text-xl mb-1">Designed and Developed by Amir Mushtaq</p>
-      <p class="text-white/80 text-sm md:text-base flex flex-col md:flex-row items-center justify-center gap-2">
+    <!-- Divider (desktop only) -->
+    <div class="hidden md:block w-px h-16 bg-blue-700 mx-4"></div>
+
+    <!-- Right: Designer + Educational Info -->
+    <div class="text-right flex-1 flex flex-col items-end gap-1">
+
+      <!-- Designer -->
+      <p class="text-sm md:text-base font-medium mb-0.5">
+        <span class="text-white/80">Designed and Developed by</span>
+        <span class="amir-highlight ml-1 md:ml-2 text-sm md:text-base">AMIR MUSHTAQ</span>
+      </p>
+
+      <!-- Educational Info -->
+      <p class="text-white/80 text-xs md:text-sm flex flex-col md:flex-row items-end gap-1 md:gap-3 md:whitespace-nowrap">
         <span>🎓 M.Tech AI, Centre for Artificial Intelligence</span>
         <span>🏛️ Islamic University of Science and Technology</span>
       </p>
-    </div>
 
+    </div>
   </div>
 </footer>
+
+<!-- AMIR MUSHTAQ Gradient Shimmer + Footer Animation -->
+<style>
+/* Slide-up animation */
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up-once {
+  animation: slideUpFade 1s ease-out forwards;
+}
+
+/* Gradient shimmer for AMIR MUSHTAQ */
+@keyframes gradient-shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.amir-highlight {
+  display: inline-block;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ffffff, #ffb6b9, #ffd7a8, #ffffff);
+  background-size: 400% 100%;
+  -webkit-background-clip: text; /* for Chrome/Safari */
+  -webkit-text-fill-color: transparent; /* for Chrome/Safari */
+  background-clip: text; /* for Firefox */
+  color: transparent; /* fallback */
+  animation: gradient-shimmer 4s linear infinite;
+}
+</style>
+
 
 <style>
 /* Slide-up animation */
