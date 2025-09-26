@@ -1351,9 +1351,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- Day 1 Column -->
       <div class="flex flex-col gap-3 md:gap-4">
         <!-- Day 1 Heading (separated, colored) -->
-        <h3 class="font-bold text-lg md:text-xl text-blue-300 text-center md:text-left mb-4 py-2 px-4 rounded-lg bg-blue-800/50">
-          Day 1 — Inauguration & Foundational Talks
-        </h3>
+<h3 class="font-bold text-lg md:text-xl text-yellow-300 text-center md:text-left mb-4 py-2 px-4 rounded-lg bg-blue-800/50">
+  Day 1 — Inauguration & Foundational Talks
+</h3>
 
         <!-- Day 1 Program Cards (shimmer + slide-in) -->
         <div class="program-card slide-left shimmer-card bg-blue-700/60 p-3 md:p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="0">
@@ -1396,9 +1396,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- Day 2 Column -->
       <div class="flex flex-col gap-3 md:gap-4">
         <!-- Day 2 Heading (separated, colored) -->
-        <h3 class="font-bold text-lg md:text-xl text-blue-300 text-center md:text-left mb-4 py-2 px-4 rounded-lg bg-blue-800/50">
-          Day 2 — Technical & Collaborative Talks
-        </h3>
+<h3 class="font-bold text-lg md:text-xl text-yellow-300 text-center md:text-left mb-4 py-2 px-4 rounded-lg bg-blue-800/50">
+  Day 2 — Technical & Collaborative Talks
+</h3>
 
         <!-- Day 2 Program Cards (shimmer + slide-in) -->
         <div class="program-card slide-left shimmer-card bg-blue-700/60 p-3 md:p-4 rounded-xl shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-105 cursor-pointer" data-delay="0">
@@ -2070,133 +2070,135 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 
-<!-- RATIONALE -->
+<!-- RATIONALE (optimized for readable width + responsive padding) -->
 <section id="rationale" class="pt-12 pb-12 bg-blue-900">
-  <div class="max-w-6xl mx-auto px-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <!-- Header outside the card -->
-    <header class="mb-8 text-center flex flex-col items-center">
+    <!-- Main Heading -->
+    <header class="mb-4 text-center flex flex-col items-center">
       <div class="flex items-center space-x-3">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
         </svg>
         <h2 class="text-2xl md:text-3xl font-bold text-white">Rationale</h2>
       </div>
     </header>
 
-    <!-- Content wrapper with shimmer -->
-    <div class="rationale-card shimmer slide-up p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl backdrop-blur-sm transform hover:scale-105 overflow-visible">
+    <!-- Separated Colored Heading + Subheading -->
+    <div class="mb-6 text-center slide-up">
+  <h3 class="text-xl md:text-2xl font-semibold text-cyan-200">
+    Artificial Intelligence and Higher Education:
+  </h3>
+  <h4 class="text-base md:text-lg font-medium text-amber-300 mt-2">
+    Relevance and Responsible Innovation
+  </h4>
+</div>
 
-      <div class="space-y-4 text-justify text-white/90">
-        <p class="shimmer-paragraph" style="--shimmer-delay: 0s;">
-          <strong class="shimmer-term">Artificial Intelligence (AI)</strong> is transforming education, research, and governance globally. In India, initiatives like <span class="shimmer-term">IndiaAI Mission</span>, <span class="shimmer-term">ANRF Act</span>, <span class="shimmer-term">NEP 2020</span>, and <span class="shimmer-term">DPDP Act</span> are driving innovation, building human capacity, and enabling ethical, data-driven AI adoption.
+
+    <!-- CONTENT WRAPPER: constrained measure for comfortable reading -->
+    <div class="rationale-content mx-auto">
+      <div class="space-y-4 text-justify text-white/90 slide-up">
+        <p>
+          <span class="gradient-term">Artificial Intelligence (AI)</span> is rapidly emerging as a transformative force across education, research, industry, and governance. Globally, universities and research institutions are reorienting their curricula, research priorities, and governance frameworks to address both the opportunities and the risks associated with AI. In India, this transformation is being accelerated by landmark initiatives such as the <span class="gradient-term">IndiaAI Mission (2024)</span>, with an outlay of <span class="gradient-term">₹10,371.92 crore</span>, the <span class="gradient-term">Anusandhan National Research Foundation (ANRF) Act, 2023</span>, and the <span class="gradient-term">National Education Policy (NEP) 2020</span>. Together, these policy frameworks aim to strengthen the national research ecosystem, build human capacity, foster innovation, and promote the responsible adoption of new technologies. Complementing these, the <span class="gradient-term">Digital Personal Data Protection Act, 2023 (DPDP)</span> establishes the ethical and regulatory foundation necessary for data-driven research that underpins AI applications.
         </p>
 
-        <p class="shimmer-paragraph" style="--shimmer-delay: 0.5s;">
-          Higher education institutions play a crucial role by preparing the next generation of <span class="shimmer-term">researchers</span>, <span class="shimmer-term">professionals</span>, and <span class="shimmer-term">policymakers</span>, and by applying <span class="shimmer-term">AI</span> to critical challenges such as <span class="shimmer-term">jobs</span>, <span class="shimmer-term">health</span>, <span class="shimmer-term">education</span>, <span class="shimmer-term">nutrition</span>, <span class="shimmer-term">climate</span>, and <span class="shimmer-term">sustainable development</span>. Success requires updated curricula, research infrastructure, ethical AI practices, and collaborations with industry and national missions.
+        <p>
+          For higher education institutions in India, engaging with AI is both an urgent necessity and a strategic opportunity. Universities play a pivotal role in preparing the next generation of <span class="gradient-term">researchers</span>, <span class="gradient-term">professionals</span>, and <span class="gradient-term">policymakers</span> who must be equipped with AI and data literacy. At the same time, higher education institutions serve as incubators for research and innovation, where AI can be applied to address critical challenges of good jobs creation; food and nutritional security; health care and educational insecurities and inequalities; and climate change and environmental sustainability. An efficient and effective governance and development delivery system is an imperative. By embedding AI within academic programs and research pipelines, universities can contribute not only to advancing knowledge but also to generating localized, context-specific solutions that directly benefit balanced economic and social development without compromising nature that underpins it all.
         </p>
 
-        <p class="shimmer-paragraph" style="--shimmer-delay: 1s;">
-          This seminar provides a platform for <span class="shimmer-term">academic leaders</span>, <span class="shimmer-term">faculty</span>, <span class="shimmer-term">students</span>, <span class="shimmer-term">policymakers</span>, and <span class="shimmer-term">industry experts</span> to discuss institutional readiness, research priorities, and actionable strategies. By aligning universities with national AI goals, higher education institutions can foster <span class="shimmer-term">innovation</span>, <span class="shimmer-term">responsible adoption</span>, and balanced socio-economic development.
+        <p>
+          Against this backdrop, the seminar aims to provide a timely and strategic platform for academic leaders, faculty, students, policymakers, and industry experts to engage in dialogue on <span class="gradient-term">Artificial Intelligence and Higher Education</span>. Such a forum enables collective reflection on institutional readiness, identification of priority areas for research and innovation, and the drafting of actionable roadmaps for capacity-building. By bridging the gap between national strategies and institutional implementation, higher education institutions can position themselves to contribute meaningfully to the national AI mission and its goals of innovation, capacity-building, and responsible adoption.
         </p>
       </div>
-
     </div>
+
   </div>
 </section>
 
 <style>
 /* Slide-up animation */
 .slide-up {
-  transform: translateY(4rem);
+  transform: translateY(3rem);
   opacity: 0;
-  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.5s ease-in-out;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s ease-in-out;
+  will-change: transform, opacity;
 }
 .slide-up.visible {
   transform: translateY(0);
   opacity: 1;
 }
 
-/* Continuous shimmering effect for the card */
-.rationale-card {
-  position: relative;
-  overflow: hidden;
+/* Hover zoom effect: only for wrappers, not long text */
+.hover-zoom:hover {
+  transform: scale(1.02);
   transition: transform 0.3s ease;
 }
-.rationale-card:hover {
-  transform: scale(1.05);
-}
-.rationale-card.shimmer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 300%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 100%);
-  transform: skewX(-20deg);
-  animation: shimmerWave 6s infinite linear;
-  pointer-events: none;
-  z-index: 1;
+
+/* Shimmer keyframes (used for gradient-term shimmer) */
+@keyframes shimmerSlow {
+  0% { background-position: -300px 0; }
+  100% { background-position: 300px 0; }
 }
 
-/* Shimmer for key terms */
-@keyframes shimmerSlow {
-  0% { background-position: -200px 0; }
-  100% { background-position: 200px 0; }
-}
+/* Shimmer-term (kept for optional use) */
 .shimmer-term {
-  display: inline-block;
+  color: #fff; /* fallback text color */
   background-image: linear-gradient(90deg, #ffffff, #ffb6b9, #ffd7a8, #ffffff);
   background-size: 400px 100%;
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
+  -webkit-text-fill-color: transparent;
   animation: shimmerSlow 4s linear infinite;
 }
 
-/* Shimmer wave animation for card */
-@keyframes shimmerWave {
-  0% { left: -150%; }
-  50% { left: 150%; }
-  100% { left: -150%; }
+/* Gradient-pill highlight (cross-browser) WITH subtle shimmering animation */
+.gradient-term {
+  display: inline-block;
+  padding: 0.06em 0.36em;
+  border-radius: 0.35rem;
+  /* base gradient background */
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  background-size: 600px 100%; /* large width to allow smooth movement */
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06) inset;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
+  /* shimmer animation applied to the background-position */
+  animation: shimmerSlow 6s linear infinite;
 }
 
-/* Staggered shimmer effect for paragraphs */
-.shimmer-paragraph {
-  position: relative;
-  overflow: hidden;
+/* Make the shimmer pause on reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-term { animation: none; }
 }
-.shimmer-paragraph::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 300%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 100%);
-  transform: skewX(-20deg);
-  animation: shimmerWave 6s infinite linear;
-  animation-delay: var(--shimmer-delay);
-  pointer-events: none;
-  z-index: 1;
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  #rationale h3 {
+    font-size: 1rem;
+  }
+  #rationale .slide-up {
+    font-size: 1rem;
+    line-height: 1.6rem;
+  }
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const slideCards = document.querySelectorAll('.slide-up');
+  const slideItems = document.querySelectorAll('.slide-up');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 200);
+        setTimeout(() => entry.target.classList.add('visible'), 200);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
-  slideCards.forEach(card => observer.observe(card));
+  slideItems.forEach(item => observer.observe(item));
 });
 </script>
 
@@ -2405,11 +2407,11 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="text-sm text-white/80 mt-2">Reach out to our AI faculty members</p>
     </header>
 
-    <!-- Contact Cards -->
-    <div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full">
+    <!-- Contact Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
       <!-- Dr. Assif Assad -->
-      <div class="contact-card delegate-card flex flex-col items-center justify-center w-full md:w-1/2 p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once shimmer-card" data-delay="100">
-        <img src="{{ url_for('static', filename='Images/Assif Assad.jpeg') }}" alt="Dr. Assif Assad" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover">
+      <div class="contact-card delegate-card theme-subcard shimmer-card slide-left bg-blue-700/60 rounded-2xl p-6 border border-white/20 shadow-lg backdrop-blur-sm text-center" data-delay="100">
+        <img src="{{ url_for('static', filename='Images/Assif Assad.jpeg') }}" alt="Dr. Assif Assad" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
         <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Assif Assad</h3>
         <p class="text-white/80 text-sm italic mb-2">Coordinator</p>
         <p class="text-white/90 text-sm md:text-base mb-1 text-center">Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India</p>
@@ -2418,15 +2420,12 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
 
       <!-- Dr. Muzaffar Rasool -->
-      <div class="contact-card delegate-card flex flex-col items-center justify-center w-full md:w-1/2 p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once shimmer-card" data-delay="200">
-        <img src="{{ url_for('static', filename='Images/Muzafar Rasool.jpeg') }}" alt="Dr. Muzaffar Rasool" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover">
+      <div class="contact-card delegate-card theme-subcard shimmer-card slide-left bg-blue-700/60 rounded-2xl p-6 border border-white/20 shadow-lg backdrop-blur-sm text-center" data-delay="200">
+        <img src="{{ url_for('static', filename='Images/Muzafar Rasool.jpeg') }}" alt="Dr. Muzaffar Rasool" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
         <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Muzaffar Rasool</h3>
         <p class="text-white/80 text-sm italic mb-2">Assistant Professor</p>
         <p class="text-white/90 text-sm md:text-base mb-1 text-center">Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India</p>
-        <a href="mailto:muzafar.rasool@islamicuniversity.edu.in" 
-           class="text-white underline hover:text-white/80 text-[0.85rem] sm:text-sm md:text-base text-center w-full">
-          muzafar.rasool@islamicuniversity.edu.in
-        </a>
+        <a href="mailto:muzafar.rasool@islamicuniversity.edu.in" class="text-white underline hover:text-white/80 mb-1">muzafar.rasool@islamicuniversity.edu.in</a>
         <p class="text-white/90 text-sm md:text-base">📞 +91 8825069068</p>
       </div>
     </div>
@@ -2436,7 +2435,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Slide-in JS -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const slideCards = document.querySelectorAll('.slide-in-once');
+  const slideCards = document.querySelectorAll('.slide-left');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -2455,35 +2454,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <style>
 /* Slide-in animation */
-.slide-in-once {
+.slide-left {
   transform: translateY(2rem);
   opacity: 0;
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
-.slide-in-once.visible {
+.slide-left.visible {
   transform: translateY(0);
   opacity: 1;
 }
 
-/* Pulse/zoom effect on hover */
+/* Pulse-once hover effect */
 .delegate-card {
-  transition: transform 0.3s ease;
+  will-change: transform, box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .delegate-card:hover {
-  animation: pulseZoom 1s infinite;
-  transform: scale(1.05);
+  animation: pulseOnce 0.5s forwards;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
 }
-@keyframes pulseZoom {
-  0%, 100% { transform: scale(1.05); }
+@keyframes pulseOnce {
+  0% { transform: scale(1); }
   50% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
 }
 
 /* Continuous shimmer effect */
-.shimmer-card {
+.theme-subcard.shimmer-card {
   position: relative;
   overflow: hidden;
 }
-.shimmer-card::before {
+.theme-subcard.shimmer-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -2500,6 +2501,12 @@ document.addEventListener('DOMContentLoaded', () => {
   0% { left: -150%; }
   50% { left: 150%; }
   100% { left: -150%; }
+}
+
+/* Ensure content sits above shimmer */
+.theme-subcard > * {
+  position: relative;
+  z-index: 2;
 }
 </style>
 
@@ -2709,7 +2716,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 
-  <!-- SOCIAL LINKS -->
+<!-- SOCIAL LINKS -->
 <section id="social" class="py-12 bg-blue-900">
   <div class="max-w-6xl mx-auto px-6">
 
@@ -2724,114 +2731,78 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="text-sm text-white/80 mt-2">Connect with us on social media</p>
     </header>
 
-    <!-- Social Cards -->
-    <div class="flex flex-wrap justify-center items-center gap-4 w-full">
+    <!-- Social Icons Grid -->
+    <div class="flex flex-wrap justify-center gap-8 md:gap-12">
 
       <!-- Facebook -->
-      <div class="contact-card delegate-card flex flex-col items-center justify-center w-32 sm:w-36 md:w-40 p-4 sm:p-5 md:p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once shimmer-card" data-delay="100">
-        <a href="https://www.facebook.com/iustjk" target="_blank">
-          <img src="{{ url_for('static', filename='Images/facebook.png') }}" alt="Facebook" class="h-10 sm:h-11 md:h-12 w-10 sm:w-11 md:w-12 mb-2">
-        </a>
-        <h3 class="font-semibold text-white text-xs sm:text-sm md:text-base">Facebook</h3>
-      </div>
+      <a href="https://www.facebook.com/iustjk" target="_blank"
+         class="social-card flex flex-col items-center justify-center w-28 sm:w-32 md:w-36 p-4 bg-blue-700/60 rounded-2xl shadow-lg transition-transform duration-300 hover:animate-pulse">
+        <img src="{{ url_for('static', filename='Images/facebook.png') }}" alt="Facebook" class="mb-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
+        <span class="text-white font-semibold text-xs sm:text-sm md:text-base text-center">Facebook</span>
+      </a>
 
       <!-- Instagram -->
-      <div class="contact-card delegate-card flex flex-col items-center justify-center w-32 sm:w-36 md:w-40 p-4 sm:p-5 md:p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once shimmer-card" data-delay="200">
-        <a href="https://www.instagram.com/iust_kashmir/" target="_blank">
-          <img src="{{ url_for('static', filename='Images/instagram.png') }}" alt="Instagram" class="h-10 sm:h-11 md:h-12 w-10 sm:w-11 md:w-12 mb-2">
-        </a>
-        <h3 class="font-semibold text-white text-xs sm:text-sm md:text-base">Instagram</h3>
-      </div>
+      <a href="https://www.instagram.com/iust_kashmir/" target="_blank"
+         class="social-card flex flex-col items-center justify-center w-28 sm:w-32 md:w-36 p-4 bg-blue-700/60 rounded-2xl shadow-lg transition-transform duration-300 hover:animate-pulse">
+        <img src="{{ url_for('static', filename='Images/instagram.png') }}" alt="Instagram" class="mb-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
+        <span class="text-white font-semibold text-xs sm:text-sm md:text-base text-center">Instagram</span>
+      </a>
 
       <!-- X / Twitter -->
-      <div class="contact-card delegate-card flex flex-col items-center justify-center w-32 sm:w-36 md:w-40 p-4 sm:p-5 md:p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once shimmer-card" data-delay="300">
-        <a href="https://x.com/iustjk" target="_blank">
-          <img src="{{ url_for('static', filename='Images/twitter.png') }}" alt="X / Twitter" class="h-10 sm:h-11 md:h-12 w-10 sm:w-11 md:w-12 mb-2">
-        </a>
-        <h3 class="font-semibold text-white text-xs sm:text-sm md:text-base">X / Twitter</h3>
-      </div>
+      <a href="https://x.com/iustjk" target="_blank"
+         class="social-card flex flex-col items-center justify-center w-28 sm:w-32 md:w-36 p-4 bg-blue-700/60 rounded-2xl shadow-lg transition-transform duration-300 hover:animate-pulse">
+        <img src="{{ url_for('static', filename='Images/twitter.png') }}" alt="X / Twitter" class="mb-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
+        <span class="text-white font-semibold text-xs sm:text-sm md:text-base text-center">X / Twitter</span>
+      </a>
 
       <!-- YouTube -->
-      <div class="contact-card delegate-card flex flex-col items-center justify-center w-32 sm:w-36 md:w-40 p-4 sm:p-5 md:p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once shimmer-card" data-delay="400">
-        <a href="https://www.youtube.com/c/IUSTJK" target="_blank">
-          <img src="{{ url_for('static', filename='Images/youtube.png') }}" alt="YouTube" class="h-10 sm:h-11 md:h-12 w-10 sm:w-11 md:w-12 mb-2">
-        </a>
-        <h3 class="font-semibold text-white text-xs sm:text-sm md:text-base">YouTube</h3>
-      </div>
+      <a href="https://www.youtube.com/c/IUSTJK" target="_blank"
+         class="social-card flex flex-col items-center justify-center w-28 sm:w-32 md:w-36 p-4 bg-blue-700/60 rounded-2xl shadow-lg transition-transform duration-300 hover:animate-pulse">
+        <img src="{{ url_for('static', filename='Images/youtube.png') }}" alt="YouTube" class="mb-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
+        <span class="text-white font-semibold text-xs sm:text-sm md:text-base text-center">YouTube</span>
+      </a>
 
       <!-- LinkedIn -->
-      <div class="contact-card delegate-card flex flex-col items-center justify-center w-32 sm:w-36 md:w-40 p-4 sm:p-5 md:p-6 rounded-2xl shadow-lg backdrop-blur-sm bg-blue-700/60 transition-transform duration-300 cursor-pointer text-center slide-in-once shimmer-card" data-delay="500">
-        <a href="https://www.linkedin.com/school/iustjk" target="_blank">
-          <img src="{{ url_for('static', filename='Images/linkedin.png') }}" alt="LinkedIn" class="h-10 sm:h-11 md:h-12 w-10 sm:w-11 md:w-12 mb-2">
-        </a>
-        <h3 class="font-semibold text-white text-xs sm:text-sm md:text-base">LinkedIn</h3>
-      </div>
+      <a href="https://www.linkedin.com/school/iustjk" target="_blank"
+         class="social-card flex flex-col items-center justify-center w-28 sm:w-32 md:w-36 p-4 bg-blue-700/60 rounded-2xl shadow-lg transition-transform duration-300 hover:animate-pulse">
+        <img src="{{ url_for('static', filename='Images/linkedin.png') }}" alt="LinkedIn" class="mb-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
+        <span class="text-white font-semibold text-xs sm:text-sm md:text-base text-center">LinkedIn</span>
+      </a>
 
     </div>
   </div>
 </section>
 
 <style>
-/* Slide-in animation */
-.slide-in-once {
-  transform: translateY(1.5rem);
-  opacity: 0;
-  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-}
-.slide-in-once.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* Pulse/zoom effect on hover */
-.delegate-card {
-  transition: transform 0.3s ease;
-}
-.delegate-card:hover {
-  animation: pulseZoom 1s infinite;
-  transform: scale(1.05);
-}
-@keyframes pulseZoom {
-  0%, 100% { transform: scale(1.05); }
+/* Hover pulse effect */
+@keyframes pulseScale {
+  0% { transform: scale(1); }
   50% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
 }
 
-/* Continuous shimmer effect */
-.shimmer-card {
-  position: relative;
-  overflow: hidden;
+.hover\:animate-pulse:hover {
+  animation: pulseScale 0.5s forwards;
 }
-.shimmer-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 300%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 100%);
-  transform: skewX(-20deg);
-  animation: shimmerWave 6s infinite linear;
-  pointer-events: none;
-  z-index: 1;
-}
-@keyframes shimmerWave {
-  0% { left: -150%; }
-  50% { left: 150%; }
-  100% { left: -150%; }
+
+/* Ensure icons & text are centered */
+.social-card img,
+.social-card span {
+  display: block;
+  text-align: center;
 }
 
 /* Mobile optimization */
 @media (max-width: 640px) {
-  .delegate-card {
-    width: 28vw;
-    padding: 1rem;
+  .social-card {
+    width: 32vw;
+    padding: 0.75rem;
   }
-  .delegate-card img {
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.5rem;
+  .social-card img {
+    width: 2.5rem;
+    height: 2.5rem;
   }
-  .delegate-card h3 {
+  .social-card span {
     font-size: 0.7rem;
   }
 }
