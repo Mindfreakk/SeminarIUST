@@ -210,38 +210,46 @@ mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 </script>
 
 
-  <!-- Spacer to prevent overlap with fixed navbar -->
+<!-- Spacer to prevent overlap with fixed navbar -->
 <div class="h-16 md:h-20" aria-hidden="true"></div>
 
-<!-- Banner Section -->
-<section id="banner" class="relative mb-12 pt-16 md:pt-20 h-[20rem] md:h-[24rem] lg:h-[28rem] overflow-hidden page-wrap rounded-3xl bg-blue-900">
-  <div class="max-w-7xl mx-auto h-full relative rounded-3xl overflow-hidden shadow-2xl">
 
+<!-- Banner Section -->
+<section id="banner"
+  class="relative mb-12 pt-16 md:pt-20 h-auto md:h-[24rem] lg:h-[28rem] 
+         overflow-hidden page-wrap rounded-3xl bg-blue-900 px-4 md:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto h-full relative rounded-3xl overflow-hidden shadow-2xl">
     <!-- Banner Image -->
-    <img id="bannerImg" 
-         src="{{ url_for('static', filename='Images/Banner.jpg') }}" 
-         alt="Seminar Banner" 
-         class="w-full h-full object-cover absolute inset-0 rounded-3xl">
+    <img id="bannerImg"
+      src="{{ url_for('static', filename='Images/Banner.jpg') }}"
+      alt="Seminar Banner"
+      class="w-full h-full object-cover rounded-3xl">
 
     <!-- Gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/10 via-blue-900/60 to-black/10 pointer-events-none rounded-3xl"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/10 via-blue-900/60 to-black/10 
+                pointer-events-none rounded-3xl"></div>
 
     <!-- Shimmer overlay -->
-    <div class="absolute inset-0 shimmer-overlay pointer-events-none animate-pulse bg-white/10 rounded-3xl"></div>
+    <div class="absolute inset-0 shimmer-overlay pointer-events-none animate-pulse 
+                bg-white/10 rounded-3xl"></div>
 
     <!-- Banner Text -->
-<div class="absolute inset-0 flex flex-col justify-center items-start text-left px-6 md:pl-12 lg:pl-16 w-full max-w-4xl">
-  <div class="banner-text opacity-0 transition-all duration-[1500ms] ease-out w-full">
-    <h2 class="banner-heading text-base md:text-xl lg:text-2xl font-bold text-white opacity-0 transform translate-y-6 transition-all duration-[1000ms] ease-out">
-  Artificial Intelligence & Higher Education
-</h2>
-    <p class="banner-sub text-sm md:text-base text-white/90 mt-2 opacity-0 transform translate-y-6 transition-all duration-[1000ms] ease-out">
-      Relevance and Responsible Innovation
-    </p>
+    <div class="absolute inset-0 flex flex-col justify-center items-start text-left px-6 
+                md:pl-12 lg:pl-16 w-full max-w-4xl">
+      <div class="banner-text opacity-0 transition-all duration-[1500ms] ease-out w-full">
+        <h2 class="banner-heading text-base md:text-xl lg:text-2xl font-bold text-white 
+                   opacity-0 transform translate-y-6 transition-all duration-[1000ms] ease-out">
+          Artificial Intelligence & Higher Education
+        </h2>
+        <p class="banner-sub text-sm md:text-base text-white/90 mt-2 opacity-0 transform 
+                  translate-y-6 transition-all duration-[1000ms] ease-out">
+          Relevance and Responsible Innovation
+        </p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-  </div>
 
   <!-- Banner Script -->
   <script>
@@ -304,7 +312,6 @@ mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
       100% { background-position: 200% 0; }
     }
   </style>
-</section>
 
 
 <!-- Full-width Flowing Water Divider with Stronger Waves -->
