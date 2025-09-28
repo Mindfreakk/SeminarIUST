@@ -100,7 +100,7 @@
 <body class="antialiased text-gray-100 bg-blue-900">
 
   <!-- NAVBAR -->
-<nav class="bg-blue-900/95 backdrop-blur-md shadow h-16 md:h-20 flex items-center fixed w-full z-50">
+<nav id="main-navbar" class="bg-blue-900/95 backdrop-blur-md shadow h-16 md:h-20 flex items-center fixed w-full z-50">
   <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between w-full">
     <!-- Logo / Titles -->
     <a href="#banner" class="flex items-center gap-3 md:gap-4">
@@ -127,91 +127,186 @@
     </div>
 
     <!-- Mobile Hamburger -->
-<div class="md:hidden flex items-center">
-  <button id="hamburger" aria-label="Toggle menu" class="p-2 rounded hover:bg-white/10 z-50 relative">
-    <svg id="hamburger-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-    </svg>
-    <svg id="hamburger-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-    </svg>
+<div class="md:hidden flex items-center relative z-50">
+  <button id="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle menu"
+          class="p-3 flex flex-col justify-between h-10 w-10 z-50 relative hover:bg-white/10 active:bg-white/20 transition rounded-lg">
+    <span class="hamburger-line block h-0.5 w-6 bg-white rounded transition-transform duration-300 origin-top-left"></span>
+    <span class="hamburger-line block h-0.5 w-6 bg-white rounded transition-opacity duration-300"></span>
+    <span class="hamburger-line block h-0.5 w-6 bg-white rounded transition-transform duration-300 origin-bottom-left"></span>
   </button>
 </div>
-
-<!-- Mobile Overlay -->
-<div id="mobile-overlay" class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
-
-<!-- Mobile Dropdown -->
-<div id="mobile-nav" class="md:hidden absolute left-0 w-full bg-blue-900/95 shadow-lg rounded-b-xl overflow-hidden opacity-0 pointer-events-none transition-all duration-300 z-50"
-     style="top: calc(100% + 0.5rem);">
-  <a href="#themes" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform hover:scale-105">Themes</a>
-  <a href="#program" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform hover:scale-105">Program</a>
-  <a href="#speakers" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform hover:scale-105">Speakers</a>
-  <a href="#rationale" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform hover:scale-105">Rationale</a>
-  <a href="#contact" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform hover:scale-105">Contact</a>
-  <a href="#venue" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform hover:scale-105">Venue</a>
 </div>
 </nav>
 
-<!-- JS for Slide-In + Staggered Links + Overlay -->
+
+<!-- Spacer below navbar (script will set exact height, DO NOT hardcode CSS height) -->
+<div id="nav-spacer" aria-hidden="true"></div>
+
+<!-- Mobile Overlay -->
+<div id="mobile-overlay" class="fixed left-0 right-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 z-55" aria-hidden="true"></div>
+
+<!-- Mobile Dropdown -->
+<nav id="mobile-nav"
+     class="md:hidden fixed left-0 right-0 bg-blue-900/95 backdrop-blur-md shadow-lg rounded-b-xl overflow-hidden opacity-0 pointer-events-none transform-gpu transition-all duration-250 z-60"
+     aria-hidden="true" aria-labelledby="hamburger" role="navigation">
+  <a href="#themes" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Themes</a>
+  <a href="#program" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Program</a>
+  <a href="#speakers" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Speakers</a>
+  <a href="#rationale" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Rationale</a>
+  <a href="#contact" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Contact</a>
+  <a href="#venue" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Venue</a>
+</nav>
+
+<style>
+  /* keep header on top but allow mobile menu above it when open */
+  #main-navbar { z-index: 50; }     /* header */
+  #mobile-nav { z-index: 60; }      /* mobile menu (above header so links aren't hidden) */
+  #mobile-overlay { z-index: 55; }  /* overlay sits between header and page content */
+
+  /* mobile menu position: uses CSS var set by JS */
+  #mobile-nav { top: var(--header-h, 64px); transform: translateY(-10px); opacity: 0; pointer-events: none; }
+  #mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+  /* overlay should start under header */
+  #mobile-overlay { top: var(--header-h, 64px); height: calc(100% - var(--header-h, 64px)); }
+
+  /* link animation - start hidden; JS adds .visible per-link */
+  .mobile-link { opacity: 0; transform: translateY(-8px); transition: opacity .22s ease, transform .22s ease; }
+  .mobile-link.visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+  /* scroll lock class on <html> */
+  html.menu-open { overflow: hidden !important; }
+
+  /* hamburger morph */
+  .hamburger-line:nth-child(1) { transform-origin: top left; }
+  .hamburger-line:nth-child(3) { transform-origin: bottom left; }
+  #hamburger.active .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+  #hamburger.active .hamburger-line:nth-child(2) { opacity: 0; }
+  #hamburger.active .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+</style>
+
 <script>
-const hamburgerMenu = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobile-nav');
-const hamburgerOpen = document.getElementById('hamburger-open');
-const hamburgerClose = document.getElementById('hamburger-close');
-const mobileLinks = document.querySelectorAll('.mobile-link');
-const mobileOverlay = document.getElementById('mobile-overlay');
+  (function () {
+    // Elements
+    const header = document.getElementById('main-navbar');
+    const spacer = document.getElementById('nav-spacer');
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const overlay = document.getElementById('mobile-overlay');
+    const links = Array.from(mobileNav.querySelectorAll('.mobile-link'));
 
-const toggleMenu = () => {
-  const isOpen = mobileNav.classList.contains('open');
+    // timers so we can clear them on close
+    let linkTimers = [];
 
-  if (isOpen) {
-    // Close menu
-    mobileNav.classList.remove('open');
-    mobileNav.style.opacity = '0';
-    mobileNav.style.pointerEvents = 'none';
-    mobileOverlay.style.opacity = '0';
-    mobileOverlay.style.pointerEvents = 'none';
-    document.body.style.overflow = '';
-  } else {
+    // Sync header height to CSS var + spacer
+    function syncHeader() {
+      const hh = header ? Math.round(header.getBoundingClientRect().height) : 64;
+      const px = hh + 'px';
+      document.documentElement.style.setProperty('--header-h', px);
+      if (spacer) spacer.style.height = px;
+      if (mobileNav) mobileNav.style.top = px;
+      if (overlay) {
+        overlay.style.top = px;
+        overlay.style.height = `calc(100% - ${px})`;
+      }
+    }
+
     // Open menu
-    mobileNav.classList.add('open');
-    mobileNav.style.opacity = '1';
-    mobileNav.style.pointerEvents = 'auto';
-    mobileOverlay.style.opacity = '1';
-    mobileOverlay.style.pointerEvents = 'auto';
-    document.body.style.overflow = 'hidden';
+    function openMenu() {
+      // clear any leftover timers
+      linkTimers.forEach(t => clearTimeout(t));
+      linkTimers = [];
 
-    // Staggered links
-    mobileLinks.forEach((link, i) => {
-      link.style.opacity = '0';
-      link.style.transform = 'translateY(-10px)';
-      setTimeout(() => {
-        link.style.opacity = '1';
-        link.style.transform = 'translateY(0)';
-        link.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      }, i * 100);
+      mobileNav.classList.add('open');
+      overlay.classList.add('open');
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('menu-open');
+
+      // stagger the link reveal; use timers we can cancel
+      links.forEach((lnk, i) => {
+        const t = setTimeout(() => lnk.classList.add('visible'), i * 70);
+        linkTimers.push(t);
+      });
+    }
+
+    // Close menu
+    function closeMenu() {
+      // remove visible class and cancel timers
+      linkTimers.forEach(t => clearTimeout(t));
+      linkTimers = [];
+      links.forEach(lnk => lnk.classList.remove('visible'));
+
+      mobileNav.classList.remove('open');
+      overlay.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('menu-open');
+    }
+
+    // Click handlers for links -> smooth scroll + close
+    links.forEach(link => {
+      link.addEventListener('click', (ev) => {
+        const href = link.getAttribute('href') || '';
+        if (href.startsWith('#')) {
+          const target = document.querySelector(href);
+          if (target) {
+            ev.preventDefault();
+            closeMenu();
+            // delay so header stays visible while scrolling
+            setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 260);
+            return;
+          }
+        }
+        // external or fallback: just close
+        closeMenu();
+      }, { passive: true });
     });
-  }
 
-  // Toggle hamburger icons
-  hamburgerOpen.classList.toggle('hidden');
-  hamburgerClose.classList.toggle('hidden');
-};
+    // Button + overlay events
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileNav.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
 
-hamburgerMenu.addEventListener('click', (e) => {
-  e.preventDefault();
-  toggleMenu();
-});
+    // Close on ESC
+    window.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu();
+    });
 
-// Close menu when clicking overlay or a link
-mobileOverlay.addEventListener('click', toggleMenu);
-mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    // Close on resize to desktop and resync header height (debounced)
+    let rt = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(rt);
+      rt = setTimeout(() => {
+        syncHeader();
+        if (window.innerWidth >= 768) closeMenu();
+      }, 100);
+    });
+
+    // Initial sync when DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncHeader);
+    } else {
+      syncHeader();
+    }
+
+    // re-sync after load (images/fonts) and observe header changes
+    window.addEventListener('load', syncHeader);
+    if (window.ResizeObserver) {
+      try { new ResizeObserver(syncHeader).observe(header); } catch (e) { /* ignore */ }
+    }
+  })();
 </script>
 
 
 <!-- Spacer to prevent overlap with fixed navbar -->
-<div class="h-24 md:h-28 lg:h-32" aria-hidden="true"></div>
+<div class="h-10 md:h-12 lg:h-16" aria-hidden="true"></div>
 
 <!-- Banner Section -->
 <section id="banner"
@@ -281,6 +376,7 @@ mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
     if (bannerVideo) {
       bannerVideo.preload = "auto";
+      bannerVideo.loop = false; // play once only
       bannerVideo.oncanplay = () => {
         if (shimmer) {
           shimmer.style.opacity = '0';
@@ -298,15 +394,34 @@ mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
       };
     }
 
-    // Delay showing banner text by 5 seconds
-    setTimeout(() => {
-      if (bannerText) {
-        bannerText.style.opacity = '1';
-        bannerText.style.transform = 'translateY(0)';
-      }
-    }, 5000);
+    // Intersection Observer: restart video + text when banner comes into view
+    if (bannerVideo && bannerText) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Reset and play video
+            bannerVideo.currentTime = 0;
+            bannerVideo.play();
+
+            // Reset text animation
+            bannerText.style.opacity = '0';
+            bannerText.style.transform = 'translateY(10px)';
+
+            // Animate again after short delay
+            setTimeout(() => {
+              bannerText.style.opacity = '1';
+              bannerText.style.transform = 'translateY(0)';
+            }, 2000); // 2s delay before showing text again
+          } else {
+            bannerVideo.pause();
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observer.observe(document.getElementById('banner'));
+    }
   });
-  
+
   // Parallax effect for floating particles
   const particles = document.querySelectorAll('.particle');
   window.addEventListener('scroll', () => {
@@ -317,6 +432,7 @@ mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
     });
   });
 </script>
+
 
 <!-- Banner CSS -->
 <style>
@@ -2410,25 +2526,53 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Contact Cards Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
       <!-- Dr. Assif Assad -->
-      <div class="contact-card delegate-card theme-subcard shimmer-card slide-left bg-blue-700/60 rounded-2xl p-6 border border-white/20 shadow-lg backdrop-blur-sm text-center" data-delay="100">
-        <img src="{{ url_for('static', filename='Images/Assif Assad.jpeg') }}" alt="Dr. Assif Assad" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
-        <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Assif Assad</h3>
-        <p class="text-white/80 text-sm italic mb-2">Coordinator</p>
-        <p class="text-white/90 text-sm md:text-base mb-1 text-center">Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India</p>
-        <a href="mailto:assif.assad@islamicuniversity.edu.in" class="text-white underline hover:text-white/80 mb-1">assif.assad@islamicuniversity.edu.in</a>
-        <p class="text-white/90 text-sm md:text-base">📞 +91 7889589200</p>
-      </div>
+<div class="contact-card delegate-card theme-subcard shimmer-card slide-left bg-blue-700/60 rounded-2xl p-6 border border-white/20 shadow-lg backdrop-blur-sm text-center" data-delay="100">
+  <img src="{{ url_for('static', filename='Images/Assif Assad.jpeg') }}" alt="Dr. Assif Assad" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+  <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Assif Assad</h3>
+  <p class="text-white/80 text-sm italic mb-2">Coordinator</p>
+  <p class="text-white/90 text-sm md:text-base mb-1 text-center">
+    Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India
+  </p>
 
-      <!-- Dr. Muzaffar Rasool -->
-      <div class="contact-card delegate-card theme-subcard shimmer-card slide-left bg-blue-700/60 rounded-2xl p-6 border border-white/20 shadow-lg backdrop-blur-sm text-center" data-delay="200">
-        <img src="{{ url_for('static', filename='Images/Muzafar Rasool.jpeg') }}" alt="Dr. Muzaffar Rasool" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
-        <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Muzaffar Rasool</h3>
-        <p class="text-white/80 text-sm italic mb-2">Assistant Professor</p>
-        <p class="text-white/90 text-sm md:text-base mb-1 text-center">Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India</p>
-        <a href="mailto:muzafar.rasool@islamicuniversity.edu.in" class="text-white underline hover:text-white/80 mb-1">muzafar.rasool@islamicuniversity.edu.in</a>
-        <p class="text-white/90 text-sm md:text-base">📞 +91 8825069068</p>
-      </div>
-    </div>
+  <!-- Email -->
+  <p class="flex items-center justify-center gap-2 mb-1 text-sm md:text-base">
+    <span class="text-white">✉️</span>
+    <a href="mailto:assif.assad@islamicuniversity.edu.in" class="text-white underline hover:text-white/80">
+      assif.assad@islamicuniversity.edu.in
+    </a>
+  </p>
+
+  <!-- Phone -->
+  <p class="flex items-center justify-center gap-2 text-sm md:text-base text-white/90">
+    <span>📞</span>
+    <span>+91 7889589200</span>
+  </p>
+</div>
+
+<!-- Dr. Muzaffar Rasool -->
+<div class="contact-card delegate-card theme-subcard shimmer-card slide-left bg-blue-700/60 rounded-2xl p-6 border border-white/20 shadow-lg backdrop-blur-sm text-center" data-delay="200">
+  <img src="{{ url_for('static', filename='Images/Muzafar Rasool.jpeg') }}" alt="Dr. Muzaffar Rasool" class="rounded-full shadow-md mb-4 w-24 h-24 object-cover mx-auto">
+  <h3 class="font-semibold text-white text-lg md:text-xl mb-1">Dr. Muzaffar Rasool</h3>
+  <p class="text-white/80 text-sm italic mb-2">Assistant Professor</p>
+  <p class="text-white/90 text-sm md:text-base mb-1 text-center">
+    Centre for Artificial Intelligence, IUST, Awantipora, Pulwama – 192122, J&K, India
+  </p>
+
+  <!-- Email -->
+  <p class="flex items-center justify-center gap-2 mb-1 text-sm md:text-base">
+    <span class="text-white">✉️</span>
+    <a href="mailto:muzafar.rasool@islamicuniversity.edu.in" class="text-white underline hover:text-white/80">
+      muzafar.rasool@islamicuniversity.edu.in
+    </a>
+  </p>
+
+  <!-- Phone -->
+  <p class="flex items-center justify-center gap-2 text-sm md:text-base text-white/90">
+    <span>📞</span>
+    <span>+91 8825069068</span>
+  </p>
+</div>
+
   </div>
 </section>
 
@@ -2551,39 +2695,73 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
 
     <!-- Contact Info -->
-    <div class="text-center" id="contact">
-      <h3 class="font-semibold text-xl md:text-2xl mb-3">Contact</h3>
-      <p class="text-white/80 text-sm leading-relaxed">
-        📍 1-University Avenue, Awantipora, Pulwama<br>
-        Pin: 192122, Jammu & Kashmir<br>
-        GPO (Srinagar), Post Box No. 89
-      </p>
-    </div>
+<div class="text-center" id="contact">
+  <h3 class="font-semibold text-xl md:text-2xl mb-3 flex items-center justify-center gap-2">
+    <!-- Map Pin Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4.5 8-12A8 8 0 004 10c0 7.5 8 12 8 12z" />
+    </svg>
+    Campus Location
+  </h3>
+  <p class="text-white/80 text-sm leading-relaxed">
+    📍1-University Avenue, Awantipora, Pulwama<br>
+    Pin: 192122, Jammu & Kashmir<br>
+    GPO (Srinagar), Post Box No. 89
+  </p>
+</div>
 
-    <!-- Venue Info -->
-    <div class="text-center" id="venue">
-      <h3 class="font-semibold text-xl md:text-2xl mb-3">Venue</h3>
-      <p class="text-white/80 text-sm leading-relaxed">
-        <span class="block mb-1">Nund-Reshi Auditorium</span>
-        <span class="block">Academic Block – VII</span>
-      </p>
-    </div>
+<!-- Venue Info -->
+<div class="text-center" id="venue">
+  <h3 class="font-semibold text-xl md:text-2xl mb-3 flex items-center justify-center gap-2">
+    <!-- Building Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M9 21V9h6v12M4 10h16M12 4v5" />
+    </svg>
+    Venue
+  </h3>
+  <p class="text-white/80 text-sm leading-relaxed">
+    <span class="block mb-1">Nund-Reshi Auditorium</span>
+    <span class="block">Academic Block – VII</span>
+  </p>
+</div>
 
-    <!-- Reach Us -->
-    <div class="text-center">
-      <h3 class="font-semibold text-xl md:text-2xl mb-3">Reach us at:</h3>
-      <p class="text-white/80 text-sm">
-        🌐 Website: 
-        <a class="underline hover:text-white transition" href="https://www.iust.ac.in" target="_blank">iust.ac.in</a>
-      </p>
-      <p class="text-white/80 text-sm mt-1">
-        ✉️ Email: 
-        <a class="underline hover:text-white transition" href="mailto:info@iust.ac.in">info@iust.ac.in</a>
-      </p>
-      <p class="text-white/80 text-sm mt-1">
-        📞 Phone: +91 (01933) 247954 / 247955
-      </p>
-    </div>
+<!-- Reach Us -->
+<div class="text-center">
+  <h3 class="font-semibold text-xl md:text-2xl mb-3 flex items-center justify-center gap-2">
+    <!-- Mail Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m0 0l-4-4m4 4l-4 4m12-4h8" />
+    </svg>
+    Reach us at
+  </h3>
+
+  <p class="text-white/80 text-sm flex items-center justify-center gap-2">
+    <!-- Globe Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0v20m0-20c-4 4-4 16 0 20m0-20c4 4 4 16 0 20" />
+    </svg>
+    Website: 
+    <a class="underline hover:text-white transition" href="https://www.iust.ac.in" target="_blank">iust.ac.in</a>
+  </p>
+
+  <p class="text-white/80 text-sm mt-2 flex items-center justify-center gap-2">
+    <!-- Mail Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m0 0l-4-4m4 4l-4 4m12-4h8" />
+    </svg>
+    Email: 
+    <a class="underline hover:text-white transition" href="mailto:info@iust.ac.in">info@iust.ac.in</a>
+  </p>
+
+  <p class="text-white/80 text-sm mt-2 flex items-center justify-center gap-2">
+    <!-- Phone Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a2 2 0 011.788 1.106l1.32 2.64a2 2 0 01-.416 2.288l-1.116 1.116a16 16 0 006.36 6.36l1.116-1.116a2 2 0 012.288-.416l2.64 1.32A2 2 0 0121 18.72V22a2 2 0 01-2 2A18 18 0 013 5z" />
+    </svg>
+    Phone: +91 (01933) 247954 / 247955
+  </p>
+</div>
 
   </div>
 </footer>
@@ -2600,17 +2778,17 @@ document.addEventListener('DOMContentLoaded', () => {
         9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 
         14.5 7.62 14.5 9 13.38 11.5 12 11.5z"/>
       </svg>
-      Visit Us
+      Find us
     </h2>
 
     <!-- Map Card -->
     <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-lg p-4 md:p-6 bg-blue-800/60 slide-up" data-animate>
 
       <!-- Address -->
-      <p class="text-white/90 mb-4 text-center md:text-left text-sm md:text-base break-words">
-        1-University Avenue, Awantipora, Pulwama<br>
-        Pin: 192122, Jammu & Kashmir
-      </p>
+      <p class="text-white/90 mb-4 text-center md:text-left text-sm lg:text-xs break-words">
+  1-University Avenue, Awantipora, Pulwama<br>
+  Pin: 192122, Jammu & Kashmir
+</p>
 
       <!-- Map Container -->
       <div class="relative w-full h-56 sm:h-64 md:h-64 rounded-xl overflow-hidden border border-white/20 shadow-md">
