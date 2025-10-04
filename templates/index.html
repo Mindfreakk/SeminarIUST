@@ -324,8 +324,8 @@
     --ai-accent:#00b4d8;
     --ai-accent-dark:#0077b6;
     --header-h:64px;
-  }
   *{box-sizing:border-box;}
+  }
 
   /* ===== Banner layout ===== */
   .ai-banner{
@@ -3435,8 +3435,8 @@ document.addEventListener('DOMContentLoaded', () => {
   background: linear-gradient(90deg, #ffffff, #ffb6b9, #ffd7a8, #ffffff);
   background-size: 200% 100%;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
   animation: gradient-shimmer 4s linear infinite;
 }
@@ -3445,21 +3445,22 @@ document.addEventListener('DOMContentLoaded', () => {
   0% { background-position: -100% 0; }
   100% { background-position: 100% 0; }
 }
-
-/* ---------- Back to Top Button ---------- */
 </style>
-<!-- Back to Top Button -->
+
+<!-- ------ Back To Top Button ------ -->
 <a href="#" id="back-to-top" title="Back to Top">
   <span class="arrow">&#8679;</span>
 </a>
 
 <style>
-/* ---------- Back to Top Button ---------- */
+/* ---------- Back to Top Button CSS ---------- */
 #back-to-top {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  display: none; /* hidden by default */
+  display: flex;
+  opacity: 0; /* hidden initially */
+  pointer-events: none; /* disable click when hidden */
   width: 50px;
   height: 50px;
   border-radius: 50%; /* circular */
@@ -3467,8 +3468,8 @@ document.addEventListener('DOMContentLoaded', () => {
   z-index: 9999;
   font-weight: 700;
   color: #fff;
-  background: rgba(0, 180, 216, 0.15); /* glassy */
-  backdrop-filter: blur(10px); /* frosted glass */
+  background: rgba(0, 180, 216, 0.15); /* original colored glassy */
+  backdrop-filter: blur(10px); /* subtle blur */
   border: 1px solid rgba(255,255,255,0.2);
   cursor: pointer;
   overflow: hidden;
@@ -3476,7 +3477,7 @@ document.addEventListener('DOMContentLoaded', () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease, opacity 0.4s ease;
   animation: pulseGlow 2s infinite;
 }
 
@@ -3484,11 +3485,11 @@ document.addEventListener('DOMContentLoaded', () => {
 #back-to-top .arrow {
   display: inline-block;
   font-size: 1.5rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.4); /* subtle shadow */
-  animation: arrowBounce 1s infinite, arrowShimmer 2s infinite;
-  background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2), rgba(255,255,255,0.8));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  color: #fff; /* fallback color */
+  position: relative;
+  overflow: hidden;
 }
 
 /* ---------- Shimmer sweep on button ---------- */
@@ -3528,11 +3529,6 @@ document.addEventListener('DOMContentLoaded', () => {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
-#back-to-top .arrow {
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 /* ---------- Shimmer sweep on button ---------- */
 @keyframes shimmer {
@@ -3542,19 +3538,22 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 <!-- ------ Back To Top JS ------ -->
- <script>
-// Show button after scrolling down 300px
+<script>
+// Get the button
 const backToTop = document.getElementById('back-to-top');
 
+// Show/hide button with smooth fade
 window.addEventListener('scroll', () => {
   if (window.scrollY > 300) {
-    backToTop.style.display = 'flex';
+    backToTop.style.opacity = "1";
+    backToTop.style.pointerEvents = "auto"; // enable click
   } else {
-    backToTop.style.display = 'none';
+    backToTop.style.opacity = "0";
+    backToTop.style.pointerEvents = "none"; // disable click
   }
 });
 
-// Smooth scroll to top on click
+// Smooth scroll to top
 backToTop.addEventListener('click', (e) => {
   e.preventDefault();
   window.scrollTo({ top: 0, behavior: 'smooth' });
