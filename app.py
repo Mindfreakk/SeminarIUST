@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import socket
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route("/")
 def home():
@@ -37,15 +37,14 @@ def get_local_ip():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Use Render's PORT if available
     is_local = "PORT" not in os.environ     # Detect if running locally
+if is_local:
+    local_ip = get_local_ip()
+    print("\n🚀 Flask Seminar Server Running Locally:")
+    print(f"   Local:   http://127.0.0.1:{port}")
+    print(f"   Network: http://{local_ip}:{port}  (mobile access)\n")
+else:
+    print("\n🚀 Flask Seminar Server Running on Render (or cloud):")
+    print(f"   URL: https://{os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'your-app.onrender.com')}\n")
 
-    if is_local:
-        local_ip = get_local_ip()
-        print("\n🚀 Flask Seminar Server Running Locally:")
-        print(f"   Local:   http://127.0.0.1:{port}")
-        print(f"   Network: http://{local_ip}:{port}  (mobile access)\n")
-    else:
-        print("\n🚀 Flask Seminar Server Running on Render (or cloud):")
-        print(f"   URL: https://{os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'your-app.onrender.com')}\n")
-
-    # Listen on all interfaces so both local network and Render can access
-    app.run(host="0.0.0.0", port=port, debug=is_local)
+# Listen on all interfaces so both local network and Render can access
+app.run(host="0.0.0.0", port=port, debug=is_local)

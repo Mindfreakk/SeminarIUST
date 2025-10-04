@@ -26,41 +26,35 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* shimmer text */
+    /* ===== shimmer text (single keyframe definition) ===== */
     @keyframes gradientShimmer {
       0% { background-position: 200% 0; }
-      100% { background-position: 0% 0; }
+      100% { background-position: -200% 0; }
     }
-.shimmer-text {
-  font-weight: bold;
-  background: linear-gradient(90deg, #ffffff, #ff99cc, #ffcc99);
-  background-size: 200% 100%;
-  color: transparent;                  /* Fallback for non-webkit browsers */
-  background-clip: text;
-  -webkit-background-clip: text;      /* Safari/Chrome */
-  -webkit-text-fill-color: transparent;
-  text-decoration: none;               /* Remove underline */
-  animation: gradientShimmer 4s linear infinite;
-}
+    .shimmer-text {
+      font-weight: bold;
+      background: linear-gradient(90deg, #ffffff, #ff99cc, #ffcc99);
+      background-size: 200% 100%;
+      color: transparent;                   /* fallback */
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      animation: gradientShimmer 4s linear infinite;
+    }
 
-.shimmer-subtitle {
-  font-weight: normal;
-  background: linear-gradient(90deg, #f0f0f0, #ffcce6, #ffe6cc);
-  background-size: 200% 100%;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-decoration: none;               /* Remove underline */
-  animation: gradientShimmer 8s linear infinite;
-  animation-delay: 1s;
-}
-
-/* Keyframes */
-@keyframes gradientShimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
+    .shimmer-subtitle {
+      font-weight: normal;
+      background: linear-gradient(90deg, #f0f0f0, #ffcce6, #ffe6cc);
+      background-size: 200% 100%;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      animation: gradientShimmer 8s linear infinite;
+      animation-delay: 1s;
+    }
 
     /* logo shimmer */
     @keyframes logoShimmerMove {
@@ -107,453 +101,483 @@
   </style>
 </head>
 
+<!-- Body/Background Colour -->
 <body class="antialiased text-gray-100 bg-blue-900">
 
-<!-- Banner with Header -->
-<section id="banner" class="relative overflow-hidden h-screen">
+  <!-- Navbar (glassy) -->
+  <nav id="main-navbar" class="fixed top-0 left-0 w-full bg-black/40 backdrop-blur-md border-b border-white/10 h-16 md:h-20 flex items-center z-50">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between w-full">
+      <!-- Logo -->
+      <a href="#banner" class="flex items-center gap-3">
+        <div class="relative w-10 h-10 md:w-12 md:h-12">
+          <img src="{{ url_for('static', filename='Images/robotic-hand.png') }}" alt="AI Logo" class="w-full h-full rounded-lg">
+          <div class="absolute inset-0 rounded-lg logo-shimmer-overlay"></div>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-2xl md:text-3xl font-bold shimmer-text">AIHE</span>
+          <span class="text-xs md:text-sm shimmer-subtitle">Islamic University of Science and Technology</span>
+        </div>
+      </a>
 
-  <!-- Background Video/Image -->
-  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
-    <source src="{{ url_for('static', filename='Images/Banner.mp4') }}" type="video/mp4">
-    <img src="{{ url_for('static', filename='Images/Banner.jpg') }}" alt="Banner" class="absolute inset-0 w-full h-full object-cover">
-  </video>
-  <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-blue-900/40 to-black/50"></div>
-
-  <!-- Navbar (glassy and fixed) -->
-<nav id="main-navbar" class="fixed top-0 left-0 w-full bg-black/40 backdrop-blur-md border-b border-white/10 h-16 md:h-20 flex items-center z-50">
-  <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between w-full">
-    <!-- Logo -->
-    <a href="#banner" class="flex items-center gap-3">
-      <div class="relative w-10 h-10 md:w-12 md:h-12">
-        <img src="{{ url_for('static', filename='Images/robotic-hand.png') }}" alt="AI Logo" class="w-full h-full rounded-lg">
-        <div class="absolute inset-0 rounded-lg logo-shimmer-overlay"></div>
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center space-x-4 text-sm">
+        <a href="#themes" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Themes</a>
+        <a href="#program" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Program</a>
+        <a href="#speakers" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Speakers</a>
+        <a href="#rationale" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Rationale</a>
+        <a href="#contact" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Contact</a>
+        <a href="#venue" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Venue</a>
       </div>
-      <div class="flex flex-col">
-        <span class="text-2xl md:text-3xl font-bold shimmer-text">AIHE</span>
-        <span class="text-xs md:text-sm shimmer-subtitle">Islamic University of Science and Technology</span>
-      </div>
-    </a>
 
-    <!-- Desktop Links -->
-    <div class="hidden md:flex items-center space-x-4 text-sm">
-      <a href="#themes" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Themes</a>
-      <a href="#program" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Program</a>
-      <a href="#speakers" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Speakers</a>
-      <a href="#rationale" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Rationale</a>
-      <a href="#contact" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Contact</a>
-      <a href="#venue" class="px-3 py-2 rounded hover:bg-white/10 transition text-white">Venue</a>
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="hamburger" class="p-2 bg-white/10 backdrop-blur-md rounded-lg hover:bg-white/20 active:bg-white/30 transition-all duration-300 flex flex-col justify-center items-center">
+          <span class="block w-6 h-0.5 bg-white mb-1 hamburger-line transition-transform duration-300 ease-in-out"></span>
+          <span class="block w-6 h-0.5 bg-white mb-1 hamburger-line transition-opacity duration-300 ease-in-out"></span>
+          <span class="block w-6 h-0.5 bg-white hamburger-line transition-transform duration-300 ease-in-out"></span>
+        </button>
+      </div>
     </div>
+  </nav>
 
-<!-- Mobile Menu Button -->
-<div class="md:hidden">
-  <button id="hamburger" class="p-2 bg-white/10 backdrop-blur-md rounded-lg hover:bg-white/20 active:bg-white/30 transition-all duration-300 flex flex-col justify-center items-center">
-    <span class="block w-6 h-0.5 bg-white mb-1 hamburger-line transition-transform duration-300 ease-in-out"></span>
-    <span class="block w-6 h-0.5 bg-white mb-1 hamburger-line transition-opacity duration-300 ease-in-out"></span>
-    <span class="block w-6 h-0.5 bg-white hamburger-line transition-transform duration-300 ease-in-out"></span>
-  </button>
-</div>
-</div>
-</nav>
+  <!-- Mobile Overlay -->
+  <div id="mobile-overlay" class="fixed inset-x-0 top-[var(--header-h,64px)] bg-black/40 opacity-0 pointer-events-none transition-opacity duration-300 z-55" aria-hidden="true"></div>
 
-<!-- Mobile Overlay -->
-<div id="mobile-overlay" class="fixed inset-x-0 top-[var(--header-h,64px)] bg-black/40 opacity-0 pointer-events-none transition-opacity duration-300 z-55" aria-hidden="true"></div>
+  <!-- Mobile Dropdown -->
+  <nav id="mobile-nav"
+       class="md:hidden fixed left-0 right-0 top-[var(--header-h,64px)] bg-black/60 backdrop-blur-md shadow-lg rounded-b-xl overflow-hidden opacity-0 pointer-events-none transform-gpu -translate-y-4 transition-all duration-300 z-60"
+       aria-hidden="true" aria-labelledby="hamburger" role="navigation">
+    <a href="#themes" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Themes</a>
+    <a href="#program" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Program</a>
+    <a href="#speakers" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Speakers</a>
+    <a href="#rationale" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Rationale</a>
+    <a href="#contact" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Contact</a>
+    <a href="#venue" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Venue</a>
+  </nav>
 
-<!-- Mobile Dropdown -->
-<nav id="mobile-nav"
-     class="md:hidden fixed left-0 right-0 top-[var(--header-h,64px)] bg-black/60 backdrop-blur-md shadow-lg rounded-b-xl overflow-hidden opacity-0 pointer-events-none transform-gpu -translate-y-4 transition-all duration-300 z-60"
-     aria-hidden="true" aria-labelledby="hamburger" role="navigation">
-  <a href="#themes" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Themes</a>
-  <a href="#program" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Program</a>
-  <a href="#speakers" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Speakers</a>
-  <a href="#rationale" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Rationale</a>
-  <a href="#contact" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Contact</a>
-  <a href="#venue" class="mobile-link block px-6 py-3 text-white hover:bg-white/10 transition transform">Venue</a>
-</nav>
+  <!-- Mobile Menu CSS -->
+  <style>
+    /* Header z-index */
+    #main-navbar { z-index: 50; }
+    #mobile-nav { z-index: 60; }
+    #mobile-overlay { z-index: 55; }
 
-<!-- Mobile Menu CSS -->
-<style>
-/* Header z-index */
-#main-navbar { z-index: 50; }
-#mobile-nav { z-index: 60; }
-#mobile-overlay { z-index: 55; }
+    /* Mobile link animation */
+    .mobile-link {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .mobile-link.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
 
-/* Mobile link animation */
-.mobile-link {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.mobile-link.visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
+    /* Scroll lock */
+    html.menu-open { overflow: hidden !important; }
 
-/* Scroll lock */
-html.menu-open { overflow: hidden !important; }
+    /* Hamburger button glassy */
+    #hamburger {
+      cursor: pointer;
+      border-radius: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+    #hamburger:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+    #hamburger:active {
+      transform: scale(0.95);
+      background-color: rgba(255,255,255,0.3);
+    }
 
-/* Hamburger button glassy */
-#hamburger {
-  cursor: pointer;
-  border-radius: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-#hamburger:hover { 
-  transform: scale(1.05);
-  background-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-#hamburger:active {
-  transform: scale(0.95);
-  background-color: rgba(255,255,255,0.3);
-}
+    /* Hamburger morph */
+    #hamburger.active .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    #hamburger.active .hamburger-line:nth-child(2) { opacity: 0; }
+    #hamburger.active .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-/* Hamburger morph */
-#hamburger.active .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-#hamburger.active .hamburger-line:nth-child(2) { opacity: 0; }
-#hamburger.active .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+    /* Mobile dropdown animation */
+    #mobile-nav {
+      transform: translateY(-20px);
+      opacity: 0;
+      pointer-events: none;
+    }
+    #mobile-nav.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+    #mobile-overlay {
+      transition: opacity 0.3s ease;
+    }
+    #mobile-overlay.open { opacity: 1; pointer-events: auto; }
+  </style>
 
-/* Mobile dropdown animation */
-#mobile-nav {
-  transform: translateY(-20px);
-  opacity: 0;
-  pointer-events: none;
-}
-#mobile-nav.open {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-}
-#mobile-overlay {
-  transition: opacity 0.3s ease;
-}
-#mobile-overlay.open { opacity: 1; pointer-events: auto; }
-</style>
+  <!-- Mobile Menu Script -->
+  <script>
+  (function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const overlay = document.getElementById('mobile-overlay');
+    const links = Array.from(mobileNav.querySelectorAll('.mobile-link'));
+    let linkTimers = [];
 
-<!-- Mobile Menu Script -->
-<script>
-(function() {
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobile-nav');
-  const overlay = document.getElementById('mobile-overlay');
-  const links = Array.from(mobileNav.querySelectorAll('.mobile-link'));
-  let linkTimers = [];
+    function openMenu() {
+      linkTimers.forEach(t => clearTimeout(t));
+      linkTimers = [];
+      mobileNav.classList.add('open');
+      overlay.classList.add('open');
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('menu-open');
 
-  function openMenu() {
-    linkTimers.forEach(t => clearTimeout(t));
-    linkTimers = [];
-    mobileNav.classList.add('open');
-    overlay.classList.add('open');
-    hamburger.classList.add('active');
-    hamburger.setAttribute('aria-expanded', 'true');
-    mobileNav.setAttribute('aria-hidden', 'false');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.documentElement.classList.add('menu-open');
+      links.forEach((lnk,i) => {
+        const t = setTimeout(() => lnk.classList.add('visible'), i*70);
+        linkTimers.push(t);
+      });
+    }
 
-    links.forEach((lnk,i) => {
-      const t = setTimeout(() => lnk.classList.add('visible'), i*70);
-      linkTimers.push(t);
-    });
-  }
+    function closeMenu() {
+      linkTimers.forEach(t => clearTimeout(t));
+      linkTimers = [];
+      links.forEach(lnk => lnk.classList.remove('visible'));
 
-  function closeMenu() {
-    linkTimers.forEach(t => clearTimeout(t));
-    linkTimers = [];
-    links.forEach(lnk => lnk.classList.remove('visible'));
+      mobileNav.classList.remove('open');
+      overlay.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded','false');
+      mobileNav.setAttribute('aria-hidden','true');
+      overlay.setAttribute('aria-hidden','true');
+      document.documentElement.classList.remove('menu-open');
+    }
 
-    mobileNav.classList.remove('open');
-    overlay.classList.remove('open');
-    hamburger.classList.remove('active');
-    hamburger.setAttribute('aria-expanded','false');
-    mobileNav.setAttribute('aria-hidden','true');
-    overlay.setAttribute('aria-hidden','true');
-    document.documentElement.classList.remove('menu-open');
-  }
-
-  links.forEach(link => {
-    link.addEventListener('click', ev => {
-      const href = link.getAttribute('href') || '';
-      if (href.startsWith('#')) {
-        const target = document.querySelector(href);
-        if(target) {
-          ev.preventDefault();
-          closeMenu();
-          setTimeout(() => target.scrollIntoView({ behavior:'smooth', block:'start' }), 260);
-          return;
+    links.forEach(link => {
+      link.addEventListener('click', ev => {
+        const href = link.getAttribute('href') || '';
+        if (href.startsWith('#')) {
+          const target = document.querySelector(href);
+          if(target) {
+            ev.preventDefault();
+            closeMenu();
+            setTimeout(() => target.scrollIntoView({ behavior:'smooth', block:'start' }), 260);
+            return;
+          }
         }
-      }
-      closeMenu();
-    }, {passive:true});
-  });
+        closeMenu();
+      }, {passive:true});
+    });
 
-  hamburger.addEventListener('click', e => {
-    e.stopPropagation();
-    mobileNav.classList.contains('open') ? closeMenu() : openMenu();
-  });
+    hamburger.addEventListener('click', e => {
+      e.stopPropagation();
+      mobileNav.classList.contains('open') ? closeMenu() : openMenu();
+    });
 
-  overlay.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
 
-  window.addEventListener('keydown', ev => {
-    if(ev.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu();
-  });
+    window.addEventListener('keydown', ev => {
+      if(ev.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu();
+    });
 
-  window.addEventListener('resize', () => {
-    if(window.innerWidth >= 768) closeMenu();
-  });
-})();
-</script>
+    window.addEventListener('resize', () => {
+      if(window.innerWidth >= 768) closeMenu();
+    });
+  })();
+  </script>
 
+  <!-- NAVIGATION SPACER (adjust to your navbar height) -->
+  <div class="h-16 md:h-20" aria-hidden="true"></div>
 
-  <!-- Banner Content -->
-<div class="relative z-10 flex items-center justify-center text-center h-full px-6">
-  <div class="max-w-4xl mt-28 fade-in-delayed"> <!-- mt-28 pushes below navbar -->
-    <h1 class="text-3xl md:text-5xl font-bold shimmer-text mb-4 drop-shadow-lg">
-      Artificial Intelligence & Higher Education
-    </h1>
-    <p class="text-lg md:text-xl text-gray-100 mb-8 drop-shadow-md">
-      Relevance and Responsible Innovation
-    </p>
-    <!-- Button with background color, pulse, and zoom effect -->
-    <a href="#program">
-      <button class="bg-blue-500 text-white font-bold py-3 px-6 rounded-lg animate-pulse-zoom hover:bg-blue-600 transition duration-300">
-        Explore Program
-      </button>
-    </a>
+ <!-- ====== BANNER SECTION (fixed shimmer/sweep, full-screen) ====== -->
+<section id="banner" class="ai-banner" aria-labelledby="ai-banner-heading">
+  <div class="ai-banner-media" aria-hidden="true">
+    <picture>
+      <source media="(max-width:768px)" srcset="./static/images/RobotBanner_mobile.jpg">
+      <img src="./static/images/RobotBanner.jpg" alt="AI and robotics themed banner background">
+    </picture>
   </div>
-</div>
 
-<!-- Add this inside your <style> tag or CSS file -->
-<style>
-/* Pulse + Zoom Animation */
-@keyframes pulseZoom {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(59, 130, 246, 0.5);
-  }
-  50% {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
-  }
-}
+  <div class="ai-banner-overlay" aria-hidden="true"></div>
 
-.animate-pulse-zoom {
-  animation: pulseZoom 1.5s infinite;
-}
+  <div class="ai-banner-inner">
+    <h1 id="ai-banner-heading" class="ai-banner-heading">
+      <span class="ai-line">Artificial Intelligence</span>
+      <span class="ai-line ai-amp">&</span>
+      <span class="ai-line">Higher Education</span>
+    </h1>
 
-/* Fade-in after 6 seconds */
-@keyframes fadeInDelayed {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+    <p class="ai-tagline">Relevance and Responsible Innovation</p>
 
-.fade-in-delayed {
-  opacity: 0;
-  animation: fadeInDelayed 1s forwards;
-  animation-delay: 6s;
-}
-</style>
-
-
-  <!-- Floating Particles -->
-  <div class="absolute inset-0 pointer-events-none">
-    <span class="particle particle-1"></span>
-    <span class="particle particle-2"></span>
-    <span class="particle particle-3"></span>
-    <span class="particle particle-4"></span>
-    <span class="particle particle-5"></span>
-    <span class="particle particle-6"></span>
-    <span class="particle particle-7"></span>
-    <span class="particle particle-8"></span>
-    <span class="particle particle-9"></span>
-    <span class="particle particle-10"></span>
+    <!-- Button inside inner container -->
+    <a class="ai-btn" href="#program" role="button" aria-label="Explore Programs">
+      <span class="ai-btn-label">Explore Programs</span>
+    </a>
   </div>
 </section>
 
-
-<!-- Banner Script -->
-<script>
-  window.addEventListener('load', () => {
-    const bannerText = document.querySelector('.banner-text');
-    const bannerVideo = document.getElementById('bannerVideo');
-    const shimmer = document.querySelector('.shimmer-overlay');
-    const bannerImg = document.getElementById('bannerImg');
-
-    if (bannerVideo) {
-      bannerVideo.preload = "auto";
-      bannerVideo.loop = false;
-      bannerVideo.oncanplay = () => {
-        if (shimmer) {
-          shimmer.style.opacity = '0';
-          shimmer.style.transition = 'opacity 0.5s ease-out';
-          setTimeout(() => shimmer.remove(), 500);
-        }
-      };
-      bannerVideo.onerror = () => {
-        bannerVideo.style.display = 'none';
-        if (bannerImg) bannerImg.style.display = 'block';
-        if (shimmer) {
-          shimmer.style.opacity = '0';
-          setTimeout(() => shimmer.remove(), 500);
-        }
-      };
-    }
-
-    // Only change: play once per entry into view (including initial visible load)
-    if (bannerVideo && document.getElementById('banner')) {
-      const bannerEl = document.getElementById('banner');
-      let playedInThisEntry = false;
-
-      // helper to test if banner currently in viewport (used for immediate play on load)
-      function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (rect.top < (window.innerHeight || document.documentElement.clientHeight)) &&
-               (rect.bottom > 0);
-      }
-
-      // If banner is already visible when page loads, play once immediately
-      if (isInViewport(bannerEl) && !playedInThisEntry) {
-        try { bannerVideo.currentTime = 0; } catch (e) {}
-        bannerVideo.play().catch(() => {/* autoplay blocked? muted required */});
-        playedInThisEntry = true;
-        // maintain your existing text reveal behavior
-        if (bannerText) {
-          bannerText.style.opacity = '0';
-          bannerText.style.transform = 'translateY(10px)';
-          setTimeout(() => {
-            bannerText.style.opacity = '1';
-            bannerText.style.transform = 'translateY(0)';
-          }, 6000);
-        }
-      }
-
-      // IntersectionObserver: play once when entering, pause & reset flag when leaving
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (!playedInThisEntry) {
-              try { bannerVideo.currentTime = 0; } catch (e) {}
-              bannerVideo.play().catch(() => {/* autoplay blocked? muted required */});
-              playedInThisEntry = true;
-            }
-            // keep your current text animation timing
-            if (bannerText) {
-              bannerText.style.opacity = '0';
-              bannerText.style.transform = 'translateY(10px)';
-              setTimeout(() => {
-                bannerText.style.opacity = '1';
-                bannerText.style.transform = 'translateY(0)';
-              }, 6000);
-            }
-          } else {
-            // leaving view: pause and allow future re-play on re-entry
-            if (bannerVideo && !bannerVideo.paused) bannerVideo.pause();
-            playedInThisEntry = false;
-          }
-        });
-      }, { threshold: 0.5 });
-
-      observer.observe(bannerEl);
-    }
-  });
-
-  const particles = document.querySelectorAll('.particle');
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    particles.forEach((particle, index) => {
-      particle.style.transform = `translateY(${Math.sin(scrollY * 0.002 * (index + 1)) * 10}px)`;
-    });
-  });
-</script>
-
 <style>
-  /* Wrapper for banner */
-.banner-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Banner section adjustment */
-#banner {
-  margin-left: 0;          /* stay flush with left edge */
-  margin-right: -20px;     /* slight overflow only on right */
-  width: calc(100% + 20px); /* extend only to the right */
-}
-
-  /* Shimmer overlay */
-  .shimmer-overlay {
-    background: linear-gradient(
-      90deg,
-      rgba(255,255,255,0.05) 0%,
-      rgba(255,255,255,0.1) 50%,
-      rgba(255,255,255,0.05) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-  }
-  @keyframes shimmer { 
-    0% { background-position: -200% 0; } 
-    100% { background-position: 200% 0; } 
+  :root{
+    --ai-accent:#00b4d8;
+    --ai-accent-dark:#0077b6;
+    --header-h:64px;
   }
 
-  .banner-text { transition: opacity 1s ease-out, transform 1s ease-out; }
-  .banner-heading { white-space: nowrap; }
-  .glow { filter: drop-shadow(0 0 10px rgba(255,255,255,0.6)); }
+  *{box-sizing:border-box;}
 
-  /* Gradient borders */
-  .gradient-border-top, .gradient-border-bottom { background-size: 400% 100%; animation: gradientMove 8s linear infinite; }
-  .gradient-border-left, .gradient-border-right { background-size: 100% 400%; animation: gradientMoveVert 8s linear infinite; }
-  .gradient-border-top { background: linear-gradient(90deg, #ff4d4d, #ffa64d, #4d79ff, #4dffb8); }
-  .gradient-border-bottom { background: linear-gradient(90deg, #4dffb8, #4d79ff, #ffa64d, #ff4d4d); animation-direction: reverse; }
-  .gradient-border-left { background: linear-gradient(180deg, #ff4d4d, #ffa64d, #4d79ff, #4dffb8); }
-  .gradient-border-right { background: linear-gradient(180deg, #4dffb8, #4d79ff, #ffa64d, #ff4d4d); animation-direction: reverse; }
-  .glow-border { box-shadow: 0 0 15px rgba(255,255,255,0.2), 0 0 40px rgba(255,255,255,0.1); animation: pulseGlow 4s infinite ease-in-out; }
-  @keyframes pulseGlow { 
-    0%,100% { box-shadow:0 0 15px rgba(255,255,255,0.2),0 0 40px rgba(255,255,255,0.1);} 
-    50% { box-shadow:0 0 25px rgba(255,255,255,0.3),0 0 60px rgba(255,255,255,0.2);} 
+  /* Banner layout */
+  .ai-banner{
+    position:relative;
+    min-height:calc(100vh - var(--header-h));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2.5rem 1.25rem;
+    text-align:center;
+    overflow:hidden;
+    color:#fff;
   }
 
-  /* Gradient animations */
-  @keyframes gradientMove { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
-  @keyframes gradientMoveVert { 0% { background-position:50% 0%; } 50% { background-position:50% 100%; } 100% { background-position:50% 0%; } }
+  .ai-banner-media{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+  .ai-banner-media img{ width:100%; height:100%; object-fit:cover; display:block; object-position:center; }
 
-  /* Floating particles */
-  .particle { position:absolute; background: rgba(255,255,255,0.3); border-radius:50%; }
-  .particle-1 { width:5px;height:5px;top:10%;left:15%;animation: float1 7s ease-in-out infinite; }
-  .particle-2 { width:6px;height:6px;top:20%;left:30%;animation: float2 5s ease-in-out infinite; }
-  .particle-3 { width:4px;height:4px;top:35%;left:50%;animation: float3 6s ease-in-out infinite; }
-  .particle-4 { width:7px;height:7px;top:50%;left:70%;animation: float4 8s ease-in-out infinite; }
-  .particle-5 { width:3px;height:3px;top:15%;left:80%;animation: float5 5s ease-in-out infinite; }
-  .particle-6 { width:5px;height:5px;top:55%;left:20%;animation: float6 7s ease-in-out infinite; }
-  .particle-7 { width:4px;height:4px;top:65%;left:40%;animation: float7 6s ease-in-out infinite; }
-  .particle-8 { width:5px;height:5px;top:30%;left:60%;animation: float8 5s ease-in-out infinite; }
-  .particle-9 { width:4px;height:4px;top:80%;left:10%;animation: float9 8s ease-in-out infinite; }
-  .particle-10 { width:6px;height:6px;top:5%;left:75%;animation: float10 6s ease-in-out infinite; }
+  .ai-banner-overlay{ position:absolute; inset:0; background:linear-gradient(180deg,rgba(2,6,23,0.18),rgba(2,6,23,0.55)); z-index:1; }
 
-  @keyframes float1 {0%,100%{transform:translate(0,0);opacity:0.3;}50%{transform:translate(15px,-15px);opacity:0.8;} }
-  @keyframes float2 {0%,100%{transform:translate(0,0);opacity:0.4;}50%{transform:translate(-10px,-20px);opacity:0.7;} }
-  @keyframes float3 {0%,100%{transform:translate(0,0);opacity:0.3;}50%{transform:translate(20px,-10px);opacity:0.9;} }
-  @keyframes float4 {0%,100%{transform:translate(0,0);opacity:0.4;}50%{transform:translate(-15px,15px);opacity:0.8;} }
-  @keyframes float5 {0%,100%{transform:translate(0,0);opacity:0.3;}50%{transform:translate(10px,-5px);opacity:0.7;} }
-  @keyframes float6 {0%,100%{transform:translate(0,0);opacity:0.3;}50%{transform:translate(-20px,10px);opacity:0.9;} }
+  .ai-banner-inner{
+    position:relative;
+    z-index:2;
+    max-width:1100px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1.5rem; /* more spacing for button */
+    padding:0 1rem;
+  }
 
-  @keyframes float7 {0%,100%{transform:translate(0,0);opacity:0.4;}50%{transform:translate(15px,15px);opacity:0.8;} }
-  @keyframes float8 {0%,100%{transform:translate(0,0);opacity:0.3;}50%{transform:translate(-15px,-10px);opacity:0.7;} }
-  @keyframes float9 {0%,100%{transform:translate(0,0);opacity:0.3;}50%{transform:translate(10px,20px);opacity:0.8;} }
-  @keyframes float10 {0%,100%{transform:translate(0,0);opacity:0.3;}50%{transform:translate(-10px,15px);opacity:0.9;} }
+  .ai-banner-heading{ font-weight:700; font-size:clamp(2rem,4.6vw,3.6rem); line-height:1.1; margin:0; }
+  .ai-line{ display:block; }
+  .ai-amp{ font-size:1.05em; }
 
-  /* Mobile: keep text at bottom & smaller overflow */
-  @media (max-width: 640px) {
-    #banner {
-      width: calc(100vw + 12vw);
-      margin: 0 -6vw;
+  .ai-tagline{ margin:0; font-size:clamp(1rem,1.6vw,1.15rem); opacity:0.95; }
+
+  /* 3D text effect */
+  .ai-banner-heading .letter,
+  .ai-tagline .letter{
+    color:#fff;
+    text-shadow:
+      1px 1px 0 rgba(0,0,0,0.2),
+      2px 2px 0 rgba(0,0,0,0.15),
+      3px 3px 0 rgba(0,0,0,0.1),
+      4px 4px 0 rgba(0,0,0,0.05);
+    font-weight:700;
+  }
+
+  /* Button styling */
+  .ai-btn{
+    display:inline-block;
+    padding:.9rem 1.6rem;
+    border-radius:10px;
+    background:linear-gradient(90deg,var(--ai-accent),var(--ai-accent-dark));
+    color:#fff;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 10px 30px rgba(2,10,30,0.35);
+    transition:transform .2s ease, box-shadow .2s ease;
+    position:relative;
+    isolation:isolate;
+  }
+
+  .ai-btn-label{ position:relative; z-index:3; pointer-events:none; }
+
+  .ai-btn:hover{
+    transform:translateY(-4px) scale(1.04);
+    box-shadow:0 18px 42px rgba(2,10,30,0.45);
+  }
+
+  /* Desktop left-align */
+  @media(min-width:900px){
+    .ai-banner{
+      justify-content:flex-start;
+      text-align:left;
+      padding-left:6vw;
+      padding-right:2rem;
     }
-    #banner .banner-text { justify-content:flex-end; padding-bottom:1rem; }
+    .ai-banner-inner{
+      align-items:flex-start;
+      text-align:left;
+    }
+  }
+
+  /* Mobile: shift image right */
+  @media(max-width:899px){
+    .ai-banner-media img{ object-position:85% center; }
+  }
+
+  @media(max-width:520px){
+    .ai-btn{ padding:.75rem 1.25rem; border-radius:8px; }
   }
 </style>
 
+<script>
+  // Wrap letters for 3D
+  function wrapLetters(selector){
+    document.querySelectorAll(selector).forEach(el=>{
+      const text = el.textContent;
+      const wrapped = text.split('').map(char=>{
+        if(char===' ') return `<span class="letter">&nbsp;</span>`;
+        return `<span class="letter">${char}</span>`;
+      }).join('');
+      el.innerHTML=wrapped;
+    });
+  }
+  wrapLetters('.ai-banner-heading .ai-line');
+  wrapLetters('.ai-tagline');
+</script>
 
+<style>
+  :root{
+    --ai-accent:#00b4d8;
+    --ai-accent-dark:#0077b6;
+    --header-h:64px;
+  }
+  *{box-sizing:border-box;}
+
+  /* ===== Banner ===== */
+  .ai-banner{
+    position:relative;
+    min-height:calc(100vh - var(--header-h));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2.5rem 1.25rem;
+    text-align:center;
+    overflow:hidden;
+    color:#fff;
+  }
+  .ai-banner-media{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+  .ai-banner-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ai-banner-overlay{ position:absolute; inset:0; background:linear-gradient(180deg,rgba(2,6,23,0.18),rgba(2,6,23,0.55)); z-index:1; }
+  .ai-banner-inner{ position:relative; z-index:2; max-width:1100px; width:100%; display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0 1rem; }
+
+  .ai-banner-heading{ font-weight:700; font-size:clamp(2rem,4.6vw,3.6rem); line-height:1.02; margin:0; }
+  .ai-line{ display:block; }
+  .ai-amp{ font-size:1.05em; }
+  .ai-tagline{ margin:0; font-size:clamp(1rem,1.6vw,1.15rem); opacity:0.95; }
+
+  /* ===== Button ===== */
+  .ai-btn {
+    display: inline-block;
+    padding: .9rem 1.6rem;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--ai-accent), var(--ai-accent-dark));
+    color: #fff; -webkit-text-fill-color: #fff;
+    font-weight: 700; text-decoration: none;
+    margin-top: .6rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(2,10,30,0.35);
+    transition: transform .18s ease, box-shadow .18s ease;
+    isolation: isolate;
+  }
+  .ai-btn:focus { outline: 3px solid rgba(0,180,216,0.14); outline-offset: 3px; }
+  .ai-btn-label { position: relative; z-index: 3; display: inline-block; text-shadow: 0 6px 20px rgba(0,0,0,0.55); pointer-events: none; }
+
+  /* shimmer (behind text) */
+  .ai-btn::before {
+    content: "";
+    position: absolute;
+    inset: -40% -40%;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
+    transform: translateX(-30%);
+    opacity: .25;
+    animation: ai-shimmer 3.6s linear infinite;
+    z-index: 1;
+  }
+
+  /* hover sweep (under text) */
+  .ai-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255,255,255,0.25), rgba(255,255,255,0));
+    transform: translateX(-80%);
+    transition: transform .6s cubic-bezier(.2,.9,.2,1);
+    opacity: .45;
+    z-index: 1;
+  }
+  .ai-btn:hover::after { transform: translateX(80%); }
+
+  @keyframes ai-shimmer {
+  0%   { transform: translateX(-40%); }
+  50%  { transform: translateX(40%); }
+  100% { transform: translateX(120%); }
+}
+  @keyframes ai-btn-pulse {
+    0% { transform: translateY(-4px) scale(1.02); }
+    50% { transform: translateY(-6px) scale(1.07); }
+    100% { transform: translateY(-4px) scale(1.02); }
+  }
+  @keyframes ai-slideInLeft { from { opacity:0; transform:translateX(-28px); } to { opacity:1; transform:translateX(0); } }
+
+  .ai-line { opacity: 0; animation: ai-slideInLeft 1s cubic-bezier(.22,.9,.3,1) forwards; }
+  .ai-line:nth-child(1) { animation-delay: 0s; }
+  .ai-line:nth-child(2) { animation-delay: .2s; }
+  .ai-line:nth-child(3) { animation-delay: .4s; }
+  .ai-tagline { opacity: 0; animation: ai-slideInLeft 1s cubic-bezier(.22,.9,.3,1) forwards; animation-delay: .6s; }
+  .ai-btn { opacity: 0; animation: ai-slideInLeft 1s cubic-bezier(.22,.9,.3,1) forwards; animation-delay: .8s; }
+
+  /* ===== Desktop: left-align content ===== */
+  @media (min-width: 900px) {
+    .ai-banner {
+      padding: 6rem 2rem;
+      justify-content: flex-start;
+      padding-left: clamp(3rem, 8vw, 8rem);
+      padding-right: 3rem;
+      text-align: left;
+    }
+    .ai-banner-inner {
+      align-items: flex-start;
+      text-align: left;
+      width: min(55%, 720px);
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .ai-banner-heading { font-size: clamp(2.8rem, 4.1vw, 4.4rem); }
+    .ai-tagline { font-size: 1.25rem; }
+  }
+
+  /* ===== Mobile: shift image toward right side ===== */
+  @media (max-width: 899px) {
+    .ai-banner-media img {
+      object-position: 85% center;
+    }
+    .ai-banner-inner {
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .ai-banner { padding: 3rem .75rem; }
+    .ai-btn { padding: .75rem 1.25rem; border-radius: 8px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ai-line, .ai-tagline, .ai-btn, .ai-btn::before, .ai-btn::after {
+      animation: none; transition: none; opacity: 1; transform: none;
+    }
+    .ai-btn:hover { transform: none; box-shadow: 0 10px 30px rgba(2,10,30,0.35); }
+  }
+</style>
 
 <!-- Full-width Flowing Water Divider with Stronger Waves -->
 <div class="relative w-full overflow-hidden" style="height: 100px; margin-top:-5px;">
@@ -1836,15 +1860,16 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="max-w-6xl mx-auto px-6">
 
     <!-- Header outside the cards -->
-    <header class="mb-8 text-center flex flex-col items-center">
-      <div class="flex items-center space-x-3">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-        <h2 class="text-2xl md:text-3xl font-bold text-white">Key-note Speakers / Resource Persons</h2>
-      </div>
-      <p class="text-sm text-white/80 mt-2">Details of speakers and resource persons</p>
-    </header>
+<header class="mb-8 text-center flex flex-col items-center">
+  <div class="flex items-center space-x-3">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+        d="M17 20h5v-2a3 3 0 00-5.356-1.857M9 20H4v-2a3 3 0 015.356-1.857M15 11a4 4 0 10-8 0 4 4 0 008 0z" />
+    </svg>
+    <h2 class="text-2xl md:text-3xl font-bold text-white">Key-note Speakers</h2>
+  </div>
+  <p class="text-sm text-white/80 mt-2">Details of speakers and resource persons</p>
+</header>
 
     <!-- Speaker Cards Grid: side-by-side (2 columns on md+) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -3291,11 +3316,20 @@ document.addEventListener('DOMContentLoaded', () => {
 <footer class="bg-blue-950 text-white py-6 md:py-8">
   <div class="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center md:items-start gap-6 md:gap-8 relative">
 
-    <!-- Column 1: Copyright -->
-    <div class="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-1/3 border-b md:border-b-0 md:border-r border-white/20 pb-4 md:pb-0 md:pr-4">
-      <p class="text-xs md:text-sm mb-0">© 2025 Islamic University of Science and Technology.</p>
-      <p class="text-[10px] md:text-xs text-white/40 mt-0">All rights reserved.</p>
-    </div>
+    <!-- Column 1: Copyright + AI Content with 3D effect -->
+<div class="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-1/3 border-b md:border-b-0 md:border-r border-white/20 pb-4 md:pb-0 md:pr-4 gap-1">
+  <!-- Existing copyright -->
+  <p class="text-xs md:text-sm mb-0">© 2025 Islamic University of Science and Technology.</p>
+  <p class="text-[10px] md:text-xs text-white/40 mt-0">All rights reserved.</p>
+
+<!-- New AI content -->
+<h2 class="ai-footer-heading text-white font-bold text-sm md:text-base leading-snug mt-0.5">
+  Artificial Intelligence <span class="text-accent font-extrabold">&</span> Higher Education
+</h2>
+<p class="ai-footer-tagline text-white/80 text-[10px] md:text-xs mt-0.25 italic">
+  Relevance and Responsible Innovation
+</p>
+</div>
 
     <!-- Column 2: Designer -->
     <div class="flex flex-col items-center text-center w-full md:w-1/3 py-2 border-b md:border-b-0 md:border-r border-white/20 pb-4 md:pb-0 md:px-4">
@@ -3319,22 +3353,37 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <!-- Column 3: Educational Info -->
-    <div class="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-1/3 pl-0 md:pl-4">
-      <div class="flex items-center gap-2">
-        <span class="text-white/60 text-xs sm:text-sm">🎓</span>
-        <span class="text-white/60 text-xs sm:text-sm">M.Tech AI, Centre for Artificial Intelligence</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="text-white/60 text-xs sm:text-sm">🏛️</span>
-        <span class="text-white/60 text-xs sm:text-sm">Islamic University of Science and Technology</span>
-      </div>
-    </div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-1/3 pl-0 md:pl-4">
+  <div class="flex items-center gap-2">
+    <span class="text-white text-sm sm:text-base leading-none flex items-center justify-center" style="font-size:1.2em;">🎓</span>
+    <span class="text-white text-xs sm:text-sm">M.Tech AI, Centre for Artificial Intelligence</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <span class="text-white text-xs sm:text-sm leading-none flex items-center justify-center">🏛️</span>
+    <span class="text-white text-xs sm:text-sm">Islamic University of Science and Technology</span>
+  </div>
+</div>
 
   </div>
 </footer>
 
 <!-- ---------- FULL CSS ---------- -->
 <style>
+/* Accent color */
+.text-accent { color: #00b4d8; }
+
+/* Footer 3D style like banner */
+.ai-footer-heading .letter,
+.ai-footer-tagline .letter {
+  color: #fff;
+  text-shadow:
+    1px 1px 0 rgba(0,0,0,0.2),
+    2px 2px 0 rgba(0,0,0,0.15),
+    3px 3px 0 rgba(0,0,0,0.1),
+    4px 4px 0 rgba(0,0,0,0.05);
+  font-weight: 700;
+}
+
 /* ---------- BUTTON SHIMMER + PULSE + RIPPLE ---------- */
 .shimmer-btn {
   position: relative;
@@ -3564,54 +3613,21 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(()=>button.classList.remove('flash'),250);
     });
   });
+
+  // Footer 3D effect: wrap each letter in span
+  function wrapFooterLetters(selector) {
+    document.querySelectorAll(selector).forEach(el => {
+      const text = el.textContent;
+      const wrapped = text.split('').map(char => {
+        if(char === ' ') return `<span class="letter">&nbsp;</span>`;
+        return `<span class="letter">${char}</span>`;
+      }).join('');
+      el.innerHTML = wrapped;
+    });
+  }
+  wrapFooterLetters('.ai-footer-heading');
+  wrapFooterLetters('.ai-footer-tagline');
 });
-</script>
-
-
-<!-- Back to top button -->
-<button id="backToTop" 
-        class="hidden fixed bottom-6 right-6 
-               w-14 h-14 flex items-center justify-center 
-               bg-white/30 backdrop-blur-lg text-white 
-               rounded-full shadow-lg border border-white/40 
-               hover:scale-110 hover:shadow-2xl transition-all duration-300 
-               animate-pulse cursor-pointer"
-        aria-label="Back to top">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300 text-white" fill="none" 
-       viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-  </svg>
-</button>
-
-<script>
-  // Remove duplicate declaration of backToTop
-  const arrow = document.getElementById('backToTop').querySelector('svg');
-
-  // Show/hide button based on scroll
-  window.addEventListener('scroll', () => {
-    const backToTop = document.getElementById('backToTop');
-    if (window.scrollY > 300) {
-      backToTop.classList.remove('hidden', 'opacity-0');
-      backToTop.classList.add('opacity-100');
-    } else {
-      backToTop.classList.add('opacity-0');
-      backToTop.classList.remove('opacity-100');
-      setTimeout(() => backToTop.classList.add('hidden'), 300);
-    }
-  });
-
-  // Scroll to top on click
-  document.getElementById('backToTop').addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // Arrow rotation on hover
-  document.getElementById('backToTop').addEventListener('mouseenter', () => {
-    arrow.classList.add('rotate-180');
-  });
-  document.getElementById('backToTop').addEventListener('mouseleave', () => {
-    arrow.classList.remove('rotate-180');
-  });
 </script>
 
 <style>
