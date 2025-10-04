@@ -293,12 +293,12 @@
   <!-- NAVIGATION SPACER (adjust to your navbar height) -->
   <div class="h-16 md:h-20" aria-hidden="true"></div>
 
- <!-- ====== BANNER SECTION (fixed shimmer/sweep, full-screen) ====== -->
+<!-- ====== BANNER SECTION (fixed shimmer/sweep, full-screen) ====== -->
 <section id="banner" class="ai-banner" aria-labelledby="ai-banner-heading">
   <div class="ai-banner-media" aria-hidden="true">
     <picture>
-      <source media="(max-width:768px)" srcset="./static/images/RobotBanner_mobile.jpg">
-      <img src="./static/images/RobotBanner.jpg" alt="AI and robotics themed banner background">
+      <source media="(max-width:768px)" srcset="{{ url_for('static', filename='images/RobotBanner_mobile.jpg') }}">
+      <img src="{{ url_for('static', filename='images/RobotBanner.jpg') }}" alt="AI and robotics themed banner background">
     </picture>
   </div>
 
