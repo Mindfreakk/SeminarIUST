@@ -3446,6 +3446,125 @@ document.addEventListener('DOMContentLoaded', () => {
   100% { background-position: 100% 0; }
 }
 
+/* ---------- Back to Top Button ---------- */
+</style>
+<!-- Back to Top Button -->
+<a href="#" id="back-to-top" title="Back to Top">
+  <span class="arrow">&#8679;</span>
+</a>
+
+<style>
+/* ---------- Back to Top Button ---------- */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none; /* hidden by default */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* circular */
+  text-align: center;
+  z-index: 9999;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0, 180, 216, 0.15); /* glassy */
+  backdrop-filter: blur(10px); /* frosted glass */
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  animation: pulseGlow 2s infinite;
+}
+
+/* ---------- Arrow inside button ---------- */
+#back-to-top .arrow {
+  display: inline-block;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4); /* subtle shadow */
+  animation: arrowBounce 1s infinite, arrowShimmer 2s infinite;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2), rgba(255,255,255,0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Shimmer sweep on button ---------- */
+#back-to-top::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: shimmer 2s infinite;
+}
+
+/* ---------- Hover effect ---------- */
+#back-to-top:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.5);
+}
+
+/* ---------- Pulse + subtle glow ---------- */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 8px 15px rgba(0,180,216,0.2), 0 0 3px rgba(255,255,255,0.1); transform: scale(1); }
+  50% { box-shadow: 0 12px 25px rgba(0,180,216,0.4), 0 0 6px rgba(255,255,255,0.2); transform: scale(1.05); }
+  100% { box-shadow: 0 8px 15px rgba(0,180,216,0.2), 0 0 3px rgba(255,255,255,0.1); transform: scale(1); }
+}
+
+/* ---------- Arrow bounce animation ---------- */
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+  50% { transform: translateY(-4px); text-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+}
+
+/* ---------- Arrow shimmer animation ---------- */
+@keyframes arrowShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+#back-to-top .arrow {
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Shimmer sweep on button ---------- */
+@keyframes shimmer {
+  0% { left: -75%; }
+  100% { left: 125%; }
+}
+</style>
+
+<!-- ------ Back To Top JS ------ -->
+ <script>
+// Show button after scrolling down 300px
+const backToTop = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTop.style.display = 'flex';
+  } else {
+    backToTop.style.display = 'none';
+  }
+});
+
+// Smooth scroll to top on click
+backToTop.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+
+<!-- ---------- FULL CSS ---------- -->
+<style>
+
 /* ---------- DELEGATE / CONTACT CARD PULSE + SHIMMER ---------- */
 .delegate-card {
   will-change: transform, box-shadow;
@@ -3560,14 +3679,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<style>
-  #backToTop {
-    opacity: 0;
-  }
-</style>
-
   <!-- =========================
-       CUSTOM CSS (moved to end as requested)
+       CUSTOM CSS 
        ========================= -->
   <style>
     /* Animated blobs & entrance */
@@ -3594,13 +3707,6 @@ document.addEventListener('DOMContentLoaded', () => {
       transform: translateY(-6px);
       box-shadow: 0 18px 40px rgba(2,6,23,0.18);
     }
-
-    /* Back to top small tweaks */
-    #backToTop {
-      z-index: 60;
-      transition: transform 0.18s ease, opacity 0.18s ease;
-    }
-    #backToTop:hover { transform: translateY(-3px); }
 
     /* Fade slide up for other elements */
     @keyframes fadeSlideUp {
@@ -3660,7 +3766,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.getElementById('mobile-menu');
     // const hamburgerOpen = document.getElementById('hamburger-open'); // Removed duplicate
     // const hamburgerClose = document.getElementById('hamburger-close'); // Removed duplicate
-    const backToTop = document.getElementById('backToTop');
+    const backToTopBtn = document.getElementById('backToTop');
 
     // Toggle mobile menu
     if (hamburger) {
@@ -3689,22 +3795,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-
-    // Back-to-top visibility and action
-    window.addEventListener('scroll', () => {
-      if (!backToTop) return;
-      if (window.scrollY > 300) {
-        backToTop.classList.remove('hidden');
-        backToTop.classList.add('opacity-100');
-      } else {
-        backToTop.classList.add('hidden');
-      }
-    });
-    if (backToTop) {
-      backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
 
     // Single intersection observer: reveal elements and highlight nav
     (function() {
